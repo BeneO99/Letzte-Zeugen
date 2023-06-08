@@ -1,0 +1,11 @@
+﻿using System;
+namespace Letzte_Zeugen.Views.Modells
+{
+    public class Delete
+    {
+        public Delete()
+        {
+        }
+    }
+}
+

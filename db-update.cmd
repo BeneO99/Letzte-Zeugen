@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold Name=DefaultConnection Microsoft.EntityFrameworkCore.Sqlite -o Db --no-pluralize --no-build --use-database-names --force --context LetzteZeugenDB

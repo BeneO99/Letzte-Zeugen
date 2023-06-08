@@ -1,0 +1,44 @@
+﻿
+.btn
+{
+    color: red;
+    text-align: center;
+    font-family: avenir light;
+    font-size: 15px;
+    background: #779180
+}
+
+.btn-primary
+{
+    color: red;
+    text-align: center;
+    font-family: avenir light;
+    font-size: 15px;
+    background: #779180
+}
+
+.test {
+    color: red;
+    text-align: center;
+    font-family: avenir light;
+    font-size: 15px;
+    background: #779180
+}
+
+.button-middle {
+    border-radius: 20px;
+    color: white;
+    font-size: 17px;
+    text-align: center;
+    width: 290px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 5px;
+}
+
+.button-green {
+    border-color: #2dd36f;
+    background-color: #2dd36f;
+}

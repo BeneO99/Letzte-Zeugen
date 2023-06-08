@@ -1,0 +1,15 @@
+﻿body {
+    background-color: rgb(119,145,128);
+}
+
+h1 {
+    color: white;
+    text-align: left;
+    font-family: avenir light;
+    font-size: 30px;
+}
+
+h4 {
+    font-family: avenir light;
+    font-size: 15px;
+}

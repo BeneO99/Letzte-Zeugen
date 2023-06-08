@@ -1,0 +1,229 @@
+﻿@model IEnumerable<Letzte_Zeugen.Models.Formular>
+    
+    @{
+        ViewData["Title"] = "Letzte Zeugen Datenbank";
+    }
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href=" Index.styles.css" />
+
+</head>
+
+    <h1>Letzte Zeugen Datenbank</h1>
+
+    <p>
+        <a asp-action="Create">Modell hinzufügen</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modell.Bezeichnung)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Messmodell)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Existent)
+                </th>
+                <th>
+                    Maßstab
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modell.Ausschnitt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zustand)
+                </th>
+                <th>
+                    Erstellungszeitraum
+                </th>
+                <th>
+                    Abmessungen LxBxH
+                </th>
+                <th>
+                    Material
+                </th>
+                <th>
+                    Bautypus
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gefaehrdung)
+                </th>
+                <th>
+                    Urheber Nachname, Vorname
+                </th>
+                <th>
+                    Erstellungsort
+                </th>
+                <th>
+                    Beteiligte Personen
+                </th>
+                <th>
+                    Beteiligte Institute Name
+                </th>
+                <th>
+                    Beteiligte Institute Standort
+                </th>
+                <th>
+                    Prüfinstitut Name
+                </th>
+                <th>
+                    Prüfinstitut Standort
+                </th>
+                <th>
+                    Eigentümer Nachname, Vorname
+                </th>
+                <th>
+                    Heutiger Standort
+                </th>
+                <th>
+                    Bauwerk Realisiert
+                </th>
+                <th>
+                    Bauwerk Name
+                </th>
+                <th>
+                    Bauwerk Erstellungszeiraum
+                </th>
+                <th>
+                    Bauwerk Standort
+                </th>
+                <th>
+                    Bauwerk Spannweite
+                </th>
+                <th>
+                    Abbildung Titel
+                </th>
+                <th>
+                    Abbildung Pfad
+                </th>
+                <th>
+                    Kapitel
+                </th>
+                <th>
+                    Seitenzahl
+                </th>
+                <th>
+                    Bauwerk Link
+                </th>
+                <th>
+                    Link Titel
+                </th>
+                <th>
+                    Link Pfad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.Bezeichnung)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Messmodell.Messmodell1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Existent.Existent1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.Massstab)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.Ausschnitt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Zustand.Zustand1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.ErstellungszeitraumModell)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.AbmessungenLxBxH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Material.Material1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Bautypus.Bautypus1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Gefaehrdung.Gefaehrdung1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Urheber.NachnameVorname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Erstellungsort.Koordinate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.BeteiligtePersonen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.BeteiligteInstitute.Institute.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.BeteiligteInstitute.Ort.Koordinate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.PruefInstitute.Institute.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.PruefInstitute.Ort.Koordinate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Eigentuemer.NachnameVorname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Standort.Koordinate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Realisiert.Realisiert1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Projekt.Projekt.Projekt1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.ErstellungszeiraumBauwerk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Projekt.Bauwerkort.Koordinate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.Spannweite)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Abbildung.Titel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Abbildung.Pfad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.Kapitel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.Seitenzahl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Modell.BauwerkLink)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Link.LinkTitel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Link.LinkPfad)
+                    </td>
+
+                    <td>
+                        <!-- <a asp-action="Edit" asp-route-id="@item.Modell.ID">Bearbeiten</a> |-->
+                        <!--<a asp-action="Details" asp-route-id="@item.Modell.ID">Details</a> |-->
+                        <a asp-action="Delete" asp-route-id="@item.Modell.ID">Löschen</a>
+                    </td>
+                </tr>
+                        }
+                    </tbody>
+                </table>
