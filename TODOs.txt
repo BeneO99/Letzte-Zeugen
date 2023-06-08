@@ -1,0 +1,16 @@
+
+
+
+- Bearbeiten im Nachhinein
+
+- Suchfunktion
+
+- Schöne Oberfläche mit Logo, passender Schrift, angepassten spalten
+
+- Vorschlagsdroppdown
+
+- mehrere Bilder speichern
+
+- Accountverwaltung
+
+- Alles versteckt hinter anmeldung

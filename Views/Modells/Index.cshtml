@@ -19,23 +19,23 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Modell.Bezeichnung)
+                    Bezeichnung
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.Messmodell)
+                    Messmodell
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Existent)
+                    Existent
                 </th>
                 <th>
                     Maßstab
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Modell.Ausschnitt)
+                    Ausschnitt
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Zustand)
+                    Zustand
                 </th>
                 <th>
                     Erstellungszeitraum
@@ -50,7 +50,7 @@
                     Bautypus
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Gefaehrdung)
+                    Gefaehrdung
                 </th>
                 <th>
                     Urheber Nachname, Vorname
@@ -219,7 +219,7 @@
                     </td>
 
                     <td>
-                        <!-- <a asp-action="Edit" asp-route-id="@item.Modell.ID">Bearbeiten</a> |-->
+                        <a asp-action="Edit" asp-route-id="@item.Modell.ID">Bearbeiten</a> |
                         <!--<a asp-action="Details" asp-route-id="@item.Modell.ID">Details</a> |-->
                         <a asp-action="Delete" asp-route-id="@item.Modell.ID">Löschen</a>
                     </td>

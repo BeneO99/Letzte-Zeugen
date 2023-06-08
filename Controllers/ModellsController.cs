@@ -109,23 +109,6 @@ namespace Letzte_Zeugen.Controllers
         // GET: Modells/Create
         public IActionResult Create()
         {
-            ViewData["Erstellungsort"] = new SelectList(_context.Ort, "ID", "ID");
-            ViewData["IDAbbildung"] = new SelectList(_context.Abbildung, "ID", "ID");
-            ViewData["IDBautypus"] = new SelectList(_context.Bautypus, "ID", "ID");
-            ViewData["IDBeteiligteInstitute"] = new SelectList(_context.Institute, "ID", "ID");
-            ViewData["IDEigentuemer"] = new SelectList(_context.Person, "ID", "ID");
-            ViewData["IDGefaerdung"] = new SelectList(_context.Gefaehrdung, "ID", "ID");
-            ViewData["IDMaterial"] = new SelectList(_context.Material, "ID", "ID");
-            ViewData["IDProjekt"] = new SelectList(_context.Projekt, "ID", "ID");
-            ViewData["IDPruefinstitut"] = new SelectList(_context.Institute, "ID", "ID");
-            ViewData["IDUrheber"] = new SelectList(_context.Person, "ID", "ID");
-            ViewData["Standort"] = new SelectList(_context.Ort, "ID", "ID");
-            ViewData["IDLink"] = new SelectList(_context.Link, "ID", "ID");
-
-
-
-
-
             return View();
         }
 
@@ -144,7 +127,7 @@ namespace Letzte_Zeugen.Controllers
 
       //DOPPLUNGSCHECK ORTE
       // Dopplungscheck für Standort beginnen
-            if (formular.Standort != null )
+            if (formular.Standort.Koordinate != null )
             {
                 foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -168,7 +151,7 @@ namespace Letzte_Zeugen.Controllers
 
 
             // Dopplungscheck für Erstellungsort beginnen
-            if (formular.Erstellungsort != null)
+            if (formular.Erstellungsort.Koordinate != null)
             {
                 foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -192,7 +175,7 @@ namespace Letzte_Zeugen.Controllers
 
 
             // Dopplungscheck für BeteiligteInstitute.Ort beginnen
-            if (formular.BeteiligteInstitute.Ort != null)
+            if (formular.BeteiligteInstitute.Ort.Koordinate != null)
             {
                 foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -217,7 +200,7 @@ namespace Letzte_Zeugen.Controllers
 
 
             // Dopplungscheck für Projekt.Bauwerksort beginnen
-            if (formular.Projekt.Bauwerkort != null)
+            if (formular.Projekt.Bauwerkort.Koordinate != null)
             {
                 foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -446,19 +429,46 @@ namespace Letzte_Zeugen.Controllers
             {
                 return NotFound();
             }
-            ViewData["Erstellungsort"] = new SelectList(_context.Ort, "ID", "ID", modell.Erstellungsort);
-            ViewData["IDAbbildung"] = new SelectList(_context.Abbildung, "ID", "ID", modell.IDAbbildung);
-            ViewData["IDBautypus"] = new SelectList(_context.Bautypus, "ID", "ID", modell.IDBautypus);
-            ViewData["IDBeteiligteInstitute"] = new SelectList(_context.Institute, "ID", "ID", modell.IDBeteiligteInstitute);
-            ViewData["IDEigentuemer"] = new SelectList(_context.Person, "ID", "ID", modell.IDEigentuemer);
-            ViewData["IDGefaerdung"] = new SelectList(_context.Gefaehrdung, "ID", "ID", modell.IDGefaehrdung);
-            ViewData["IDMaterial"] = new SelectList(_context.Material, "ID", "ID", modell.IDMaterial);
-            ViewData["IDProjekt"] = new SelectList(_context.Projekt, "ID", "ID", modell.IDProjekt);
-            ViewData["IDPruefinstitut"] = new SelectList(_context.Institute, "ID", "ID", modell.IDPruefinstitut);
-            ViewData["IDUrheber"] = new SelectList(_context.Person, "ID", "ID", modell.IDUrheber);
-            ViewData["Standort"] = new SelectList(_context.Ort, "ID", "ID", modell.Standort);
-            ViewData["IDLink"] = new SelectList(_context.Link, "ID", "ID", modell.IDLink);
-            return View(modell);
+
+            Institute beteiligteInstitute = _context.Institute.Find(modell.IDBeteiligteInstitute);
+            Institute pruefInstitute = _context.Institute.Find(modell.IDPruefinstitut);
+            Projekt projekt = _context.Projekt.Find(modell.IDProjekt);
+
+            String Personenliste = "";
+
+            foreach (var item in _context.BeteiligtePersonen.ToList())
+            {
+                if (item.IDModell == modell.ID)
+
+                {
+                    Personenliste += _context.Person.Find(item.IDPerson).NachnameVorname + "; ";
+                }
+
+            }
+
+            Formular formular = new Formular()
+            {
+                Modell = modell,
+                Abbildung = _context.Abbildung.Find(modell.IDAbbildung),
+                Bautypus = _context.Bautypus.Find(modell.IDBautypus),
+                Gefaehrdung = _context.Gefaehrdung.Find(modell.IDGefaehrdung),
+                BeteiligtePersonen = Personenliste,
+                Eigentuemer = _context.Person.Find(modell.IDEigentuemer),
+                Erstellungsort = _context.Ort.Find(modell.Erstellungsort),
+                Standort = _context.Ort.Find(modell.Standort),
+                BeteiligteInstitute = new InstitutHelper() { Institute = beteiligteInstitute, Ort = _context.Ort.Find(beteiligteInstitute.Koordinate) },
+                PruefInstitute = new InstitutHelper() { Institute = pruefInstitute, Ort = _context.Ort.Find(pruefInstitute.Koordinate) },
+                Material = _context.Material.Find(modell.IDMaterial),
+                Projekt = new ProjektHelper() { Projekt = projekt, Bauwerkort = _context.Ort.Find(projekt.Standort) },
+                Urheber = _context.Person.Find(modell.IDUrheber),
+                Existent = _context.Existent.Find(modell.IDExistent),
+                Zustand = _context.Zustand.Find(modell.IDZustand),
+                Messmodell = _context.Messmodell.Find(modell.IDMessmodell),
+                Realisiert = _context.Realisiert.Find(projekt.IDRealisiert),
+                Link = _context.Link.Find(modell.IDLink),
+            };
+
+            return View(formular);
         }
 
         // POST: Modells/Edit/5

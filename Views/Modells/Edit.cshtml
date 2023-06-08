@@ -1,15 +1,25 @@
 ﻿@model Letzte_Zeugen.Models.Formular
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Letzte Zeugen Datenbank";
 }
 
-<h1>Edit</h1>
 
-<h4>Modell</h4>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href=" Edit.styles.css" />
+
+</head>
+
+
+
+<h1>Letzte Zeugen Datenbank</h1>
+
+<h4>Modell bearbeiten</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
+
         <form asp-action="Edit">
 
 
@@ -249,13 +259,11 @@
                 <span asp-validation-for="Modell.Seitenzahl" class="text-danger"></span>
             </div>
 
-
             <div class="form-group">
-                <label asp-for="Modell.BauwerkLink" class="control-label"></label>
+                <label asp-for="Modell.BauwerkLink" class="control-label">Bauwerk Link</label>
                 <input asp-for="Modell.BauwerkLink" class="form-control" />
                 <span asp-validation-for="Modell.BauwerkLink" class="text-danger"></span>
             </div>
-
 
             <div class="form-group">
                 <label asp-for="Link.LinkTitel" class="control-label">Link Titel</label>
@@ -268,16 +276,19 @@
                 <span asp-validation-for="Link.LinkPfad" class="text-danger"></span>
             </div>
 
-            <input type="submit" value="Hinzufügen" class="btn btn-primary" />
+            <input type="submit" value="Änderungen Speichern" class="button-middle button-green" />
 
         </form>
     </div>
 </div>
 
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Zurück ohne speichern</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
