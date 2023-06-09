@@ -28,42 +28,7 @@ namespace Letzte_Zeugen.Controllers
 
             foreach(Modell modell in _context.Modell.ToList())
             {
-                Institute beteiligteInstitute = _context.Institute.Find(modell.IDBeteiligteInstitute);
-                Institute pruefInstitute = _context.Institute.Find(modell.IDPruefinstitut);
-                Projekt projekt = _context.Projekt.Find(modell.IDProjekt);
-
-                String Personenliste = "";
-                foreach (var item in _context.BeteiligtePersonen.ToList())
-                    {
-                    if (item.IDModell == modell.ID)
-
-                    {
-                        Personenliste += _context.Person.Find(item.IDPerson).NachnameVorname + "; "; 
-                    }
-
-                    }
-
-                formList.Add(new Formular()
-                {
-                    Modell = modell,
-                    Abbildung = _context.Abbildung.Find(modell.IDAbbildung),
-                    Bautypus = _context.Bautypus.Find(modell.IDBautypus),
-                    Gefaehrdung = _context.Gefaehrdung.Find(modell.IDGefaehrdung),
-                    BeteiligtePersonen = Personenliste,
-                    Eigentuemer = _context.Person.Find(modell.IDEigentuemer),
-                    Erstellungsort = _context.Ort.Find(modell.Erstellungsort),
-                    Standort = _context.Ort.Find(modell.Standort),
-                    BeteiligteInstitute = new InstitutHelper() {Institute = beteiligteInstitute, Ort=_context.Ort.Find(beteiligteInstitute.Koordinate) },
-                    PruefInstitute = new InstitutHelper() {Institute = pruefInstitute,Ort = _context.Ort.Find(pruefInstitute.Koordinate) },
-                    Material = _context.Material.Find(modell.IDMaterial),
-                    Projekt = new ProjektHelper() {Projekt = projekt, Bauwerkort =  _context.Ort.Find(projekt.Standort)},
-                    Urheber = _context.Person.Find(modell.IDUrheber),
-                    Existent = _context.Existent.Find(modell.IDExistent),
-                    Zustand = _context.Zustand.Find(modell.IDZustand),
-                    Messmodell = _context.Messmodell.Find(modell.IDMessmodell),
-                    Realisiert = _context.Realisiert.Find(projekt.IDRealisiert),
-                    Link = _context.Link.Find(modell.IDLink),
-                });
+                formList.Add(CreateFormByID(modell.ID));
             }
 
             return View(formList);
@@ -225,7 +190,7 @@ namespace Letzte_Zeugen.Controllers
          //DOPPLUNGSCHECK PERSONEN
 
             // Dopplungscheck für Eigentuemer beginnen
-            if (formular.Eigentuemer != null)
+            if (formular.Eigentuemer.NachnameVorname != null)
             {
                 foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -249,7 +214,7 @@ namespace Letzte_Zeugen.Controllers
 
 
             // Dopplungscheck für Urheber beginnen
-            if (formular.Urheber != null)
+            if (formular.Urheber.NachnameVorname != null)
             {
                 foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -276,19 +241,6 @@ namespace Letzte_Zeugen.Controllers
 
             _context.Add(formular.Abbildung);
             _context.Add(formular.Link);
-
-
-            /*foreach (Person person in formular.BeteiligtePersonen)
-            {
-                _context.Add(person);
-            }*/
-            /* _context.Add(formular.Eigentuemer);
-             _context.Add(formular.Erstellungsort);
-             _context.Add(formular.Standort);
-             _context.Add(formular.BeteiligteInstitute.Ort); //Ort Institute
-             _context.Add(formular.Projekt.Bauwerkort); //Ort Projekt
-             _context.Add(formular.Urheber);*/
-
             _context.SaveChangesAsync(); //speichern um IDs automatisiert legen zu lassen
 
             //zweite ebene hinzufügen von den Helpern
@@ -296,12 +248,6 @@ namespace Letzte_Zeugen.Controllers
             //Ids setzen um Verknüpfung zu haben
           
             formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
-
-           /*
-            formular.Modell.Standort = formular.Standort.ID;
-            formular.Modell.Erstellungsort = formular.Erstellungsort.ID;
-            formular.Modell.IDEigentuemer = formular.Eigentuemer.ID;
-            formular.Modell.IDUrheber = formular.Urheber.ID; */
             formular.Modell.IDAbbildung = formular.Abbildung.ID;
             formular.Modell.IDLink = formular.Link.ID;
             _context.Add(formular.BeteiligteInstitute.Institute);
@@ -417,58 +363,11 @@ namespace Letzte_Zeugen.Controllers
 
 
         // GET: Modells/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        public async Task<IActionResult> Edit(long id)
         {
-            if (id == null || _context.Modell == null)
-            {
-                return NotFound();
-            }
+            
 
-            var modell = await _context.Modell.FindAsync(id);
-            if (modell == null)
-            {
-                return NotFound();
-            }
-
-            Institute beteiligteInstitute = _context.Institute.Find(modell.IDBeteiligteInstitute);
-            Institute pruefInstitute = _context.Institute.Find(modell.IDPruefinstitut);
-            Projekt projekt = _context.Projekt.Find(modell.IDProjekt);
-
-            String Personenliste = "";
-
-            foreach (var item in _context.BeteiligtePersonen.ToList())
-            {
-                if (item.IDModell == modell.ID)
-
-                {
-                    Personenliste += _context.Person.Find(item.IDPerson).NachnameVorname + "; ";
-                }
-
-            }
-
-            Formular formular = new Formular()
-            {
-                Modell = modell,
-                Abbildung = _context.Abbildung.Find(modell.IDAbbildung),
-                Bautypus = _context.Bautypus.Find(modell.IDBautypus),
-                Gefaehrdung = _context.Gefaehrdung.Find(modell.IDGefaehrdung),
-                BeteiligtePersonen = Personenliste,
-                Eigentuemer = _context.Person.Find(modell.IDEigentuemer),
-                Erstellungsort = _context.Ort.Find(modell.Erstellungsort),
-                Standort = _context.Ort.Find(modell.Standort),
-                BeteiligteInstitute = new InstitutHelper() { Institute = beteiligteInstitute, Ort = _context.Ort.Find(beteiligteInstitute.Koordinate) },
-                PruefInstitute = new InstitutHelper() { Institute = pruefInstitute, Ort = _context.Ort.Find(pruefInstitute.Koordinate) },
-                Material = _context.Material.Find(modell.IDMaterial),
-                Projekt = new ProjektHelper() { Projekt = projekt, Bauwerkort = _context.Ort.Find(projekt.Standort) },
-                Urheber = _context.Person.Find(modell.IDUrheber),
-                Existent = _context.Existent.Find(modell.IDExistent),
-                Zustand = _context.Zustand.Find(modell.IDZustand),
-                Messmodell = _context.Messmodell.Find(modell.IDMessmodell),
-                Realisiert = _context.Realisiert.Find(projekt.IDRealisiert),
-                Link = _context.Link.Find(modell.IDLink),
-            };
-
-            return View(formular);
+            return View(CreateFormByID(id));
         }
 
         // POST: Modells/Edit/5
@@ -477,177 +376,172 @@ namespace Letzte_Zeugen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id,Formular formular )
+        public async Task<IActionResult> Edit(Formular formular )
         {
-            if (id != formular.Modell.ID)
-            {
-                return NotFound();
-            }
+
+            Formular oldForm = CreateFormByID(formular.Modell.ID);
+
+
+
 
             //DOPPLUNGSCHECK ORTE
-            // Dopplungscheck für Standort beginnen
-            if (formular.Standort != null)
+
+            if (formular.Standort.Koordinate != null && oldForm.Standort != null)
             {
-                foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
-
+                if(oldForm.Standort.Koordinate == formular.Standort.Koordinate)
                 {
-                    if (item.Koordinate.Equals(formular.Standort.Koordinate)) //wenn gleich dann ID von gleichem 
-
-                    {
-                        formular.Modell.Standort = item.ID;
-                    }
-                }
-
-                if (formular.Modell.Standort == null) // Abfrage, wenn nicht Vorhanden neue ID
-
-                {
-                    _context.Update(formular.Standort); //hier wird Kontext erstellt
-                    _context.SaveChanges();
-                    formular.Modell.Standort = formular.Standort.ID;
+                    formular.Modell.Standort = oldForm.Modell.Standort;
                 }
             }
-            //Dopplungscheck fürs Standort fertig
-
-
-            // Dopplungscheck für Erstellungsort beginnen
-            if (formular.Erstellungsort != null)
+            if (formular.Erstellungsort.Koordinate != null && oldForm.Erstellungsort != null)
             {
-                foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
-
+                if(oldForm.Erstellungsort.Koordinate == formular.Erstellungsort.Koordinate)
                 {
-                    if (item.Koordinate.Equals(formular.Erstellungsort.Koordinate)) //wenn gleich dann ID von gleichem 
-
-                    {
-                        formular.Modell.Erstellungsort = item.ID;
-                    }
-                }
-
-                if (formular.Modell.Erstellungsort == null) // Abfrage, wenn nicht Vorhanden neue ID
-
-                {
-                    _context.Update(formular.Erstellungsort); //hier wird Kontext erstellt
-                    _context.SaveChanges();
-                    formular.Modell.Erstellungsort = formular.Erstellungsort.ID;
+                    formular.Modell.Erstellungsort = oldForm.Modell.Erstellungsort;
                 }
             }
-            //Dopplungscheck fürs Erstellungsort fertig
-
-
-            // Dopplungscheck für BeteiligteInstitute.Ort beginnen
-            if (formular.BeteiligteInstitute.Ort != null)
+            if (formular.BeteiligteInstitute.Ort.Koordinate != null && oldForm.BeteiligteInstitute.Ort != null)
             {
-                foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
-
+                if(oldForm.BeteiligteInstitute.Ort.Koordinate == formular.BeteiligteInstitute.Ort.Koordinate)
                 {
-                    if (item.Koordinate.Equals(formular.BeteiligteInstitute.Ort.Koordinate)) //wenn gleich dann ID von gleichem 
-
-                    {
-                        formular.BeteiligteInstitute.Institute.Koordinate = item.ID;
-                    }
-                }
-
-                if (formular.BeteiligteInstitute.Institute.Koordinate == null) // Abfrage, wenn nicht Vorhanden neue ID
-
-                {
-                    _context.Update(formular.BeteiligteInstitute.Ort); //hier wird Kontext erstellt
-                    _context.SaveChanges();
-                    formular.BeteiligteInstitute.Institute.Koordinate = formular.BeteiligteInstitute.Ort.ID;
+                    formular.BeteiligteInstitute.Institute.Koordinate = oldForm.BeteiligteInstitute.Institute.Koordinate;
                 }
             }
-            //Dopplungscheck fürs BeteiligteInstitute.Ort fertig
-
-
-
-            // Dopplungscheck für Projekt.Bauwerksort beginnen
-            if (formular.Projekt.Bauwerkort != null)
+            if (formular.Projekt.Bauwerkort.Koordinate != null && oldForm.Projekt.Bauwerkort != null)
             {
-                foreach (var item in _context.Ort.ToList()) // Abfrage, ob es schon in Db existiert 
-
+                if(oldForm.Projekt.Bauwerkort.Koordinate == formular.Projekt.Bauwerkort.Koordinate)
                 {
-                    if (item.Koordinate.Equals(formular.Projekt.Bauwerkort.Koordinate)) //wenn gleich dann ID von gleichem 
-
-                    {
-                        formular.Projekt.Projekt.Standort = item.ID;
-                    }
-                }
-
-                if (formular.Projekt.Projekt.Standort == null) // Abfrage, wenn nicht Vorhanden neue ID
-
-                {
-                    _context.Update(formular.Projekt.Bauwerkort); //hier wird Kontext erstellt
-                    _context.SaveChanges();
-                    formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
+                    formular.Projekt.Projekt.Standort = oldForm.Projekt.Projekt.Standort;
                 }
             }
-            //Dopplungscheck fürs Projekt.Bauwerksort fertig
+
+
+            foreach (var item in _context.Ort.ToList())
+            {
+                //Dopplungscheck Standort
+                if (formular.Standort.Koordinate != null && oldForm.Standort.Koordinate != formular.Standort.Koordinate && item.Koordinate.Equals(formular.Standort.Koordinate))
+                {
+                    formular.Modell.Standort = item.ID;
+                }
+                //Dopplungscheck Erstellungsort
+                if (formular.Erstellungsort.Koordinate != null && oldForm.Erstellungsort.Koordinate != formular.Erstellungsort.Koordinate && item.Koordinate.Equals(formular.Erstellungsort.Koordinate))
+                {
+                    formular.Modell.Erstellungsort = item.ID;
+                }
+                //Dopplungscheck Beteiligte Institute.Ort
+                if (formular.BeteiligteInstitute.Ort.Koordinate != null && oldForm.BeteiligteInstitute.Ort.Koordinate != formular.BeteiligteInstitute.Ort.Koordinate && item.Koordinate.Equals(formular.BeteiligteInstitute.Ort.Koordinate))
+                {
+                    formular.BeteiligteInstitute.Institute.Koordinate = item.ID;
+                }
+                //Dopplungscheck Projekt.Bauwerksort
+                if (formular.Projekt.Bauwerkort.Koordinate != null && oldForm.Projekt.Bauwerkort.Koordinate != formular.Projekt.Bauwerkort.Koordinate && item.Koordinate.Equals(formular.Projekt.Bauwerkort.Koordinate))
+                {
+                    formular.Projekt.Projekt.Standort = item.ID;
+                }
+            }
+
+            if (formular.Modell.Standort == null) // Abfrage, wenn nicht Vorhanden neue ID
+
+            {
+                _context.Add(formular.Standort); //hier wird Kontext erstellt
+                _context.SaveChanges();
+                formular.Modell.Standort = formular.Standort.ID;
+            }
+
+            if (formular.Modell.Erstellungsort == null) // Abfrage, wenn nicht Vorhanden neue ID
+
+            {
+                _context.Add(formular.Erstellungsort); //hier wird Kontext erstellt
+                _context.SaveChanges();
+                formular.Modell.Erstellungsort = formular.Erstellungsort.ID;
+            }
+
+            if (formular.BeteiligteInstitute.Institute.Koordinate == null) // Abfrage, wenn nicht Vorhanden neue ID
+
+            {
+                _context.Add(formular.BeteiligteInstitute.Ort); //hier wird Kontext erstellt
+                _context.SaveChanges();
+                formular.BeteiligteInstitute.Institute.Koordinate = formular.BeteiligteInstitute.Ort.ID;
+            }
+
+            if (formular.Projekt.Projekt.Standort == null) // Abfrage, wenn nicht Vorhanden neue ID
+
+            {
+                _context.Add(formular.Projekt.Bauwerkort); //hier wird Kontext erstellt
+                _context.SaveChanges();
+                formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
+            }
 
             //DOPPLUNGSCHECK PERSONEN
 
-            // Dopplungscheck für Eigentuemer beginnen
-            if (formular.Eigentuemer != null)
+            if(formular.Eigentuemer.NachnameVorname != null && oldForm.Eigentuemer.NachnameVorname != null)
             {
-                foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
-
+                if(formular.Eigentuemer.NachnameVorname == oldForm.Eigentuemer.NachnameVorname)
                 {
-                    if (item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname)) //wenn gleich dann ID von gleichem 
-
-                    {
-                        formular.Modell.IDEigentuemer = item.ID; // wo fremdschlüssel liegt
-                    }
-                }
-
-                if (formular.Modell.IDEigentuemer == null) // Abfrage, wenn nicht Vorhanden neue ID
-
-                {
-                    _context.Update(formular.Eigentuemer); //hier wird Kontext erstellt
-                    await _context.SaveChangesAsync();
-                    formular.Modell.IDEigentuemer = formular.Eigentuemer.ID;
+                    formular.Modell.IDEigentuemer = oldForm.Modell.IDEigentuemer;
                 }
             }
-            //Dopplungscheck für Eigentuemer fertig
-
-
-            // Dopplungscheck für Urheber beginnen
-            if (formular.Urheber != null)
+            if (formular.Urheber.NachnameVorname != null && oldForm.Urheber.NachnameVorname != null)
             {
-                foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
-
+                if(formular.Urheber.NachnameVorname == oldForm.Urheber.NachnameVorname)
                 {
-                    if (item.NachnameVorname.Equals(formular.Urheber.NachnameVorname)) //wenn gleich dann ID von gleichem 
-
-                    {
-                        formular.Modell.IDUrheber = item.ID; // wo fremdschlüssel liegt
-                    }
-                }
-
-                if (formular.Modell.IDUrheber == null) // Abfrage, wenn nicht Vorhanden neue ID
-
-                {
-                    _context.Update(formular.Urheber); //hier wird Kontext erstellt
-                    _context.SaveChanges();
-                    formular.Modell.IDUrheber = formular.Urheber.ID;
+                    formular.Modell.IDUrheber = oldForm.Modell.IDUrheber;
                 }
             }
-            //Dopplungscheck für Urheber fertig
+
+
+                foreach (var item in _context.Person.ToList())
+            {
+                //Dopplungscheck Eigentümer
+                if (formular.Eigentuemer.NachnameVorname != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname))
+                {
+                    formular.Modell.IDEigentuemer = item.ID;
+                }
+                //Dopplungscheck Urheber
+                if (formular.Urheber.NachnameVorname != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Urheber.NachnameVorname))
+                {
+                    formular.Modell.IDUrheber = item.ID;
+                }
+
+            }
+
+            if (formular.Modell.IDEigentuemer == null) // Abfrage, wenn nicht Vorhanden neue ID
+
+            {
+                _context.Add(formular.Eigentuemer); //hier wird Kontext erstellt
+                await _context.SaveChangesAsync();
+                formular.Modell.IDEigentuemer = formular.Eigentuemer.ID;
+            }
+
+            if (formular.Modell.IDUrheber == null) // Abfrage, wenn nicht Vorhanden neue ID
+
+            {
+                _context.Add(formular.Urheber); //hier wird Kontext erstellt
+                _context.SaveChanges();
+                formular.Modell.IDUrheber = formular.Urheber.ID;
+            }
+
 
 
             //unterste ebene hinzufügen
-
-            _context.Update(formular.Abbildung);
-            _context.Update(formular.Link);
-
-
-            /*foreach (Person person in formular.BeteiligtePersonen)
+            if(formular.Abbildung != oldForm.Abbildung)
             {
-                _context.Add(person);
-            }*/
-            /* _context.Add(formular.Eigentuemer);
-             _context.Add(formular.Erstellungsort);
-             _context.Add(formular.Standort);
-             _context.Add(formular.BeteiligteInstitute.Ort); //Ort Institute
-             _context.Add(formular.Projekt.Bauwerkort); //Ort Projekt
-             _context.Add(formular.Urheber);*/
-
+                _context.Remove(oldForm.Abbildung);
+                _context.Add(formular.Abbildung);
+            }
+            else
+            {
+                formular.Abbildung = oldForm.Abbildung;
+            }
+            if(formular.Link != oldForm.Link)
+            {
+                _context.Remove(oldForm.Link); 
+                _context.Add(formular.Link);
+            }
+            else
+            {
+                formular.Link = oldForm.Link;
+            }
             _context.SaveChangesAsync(); //speichern um IDs automatisiert legen zu lassen
 
             //zweite ebene hinzufügen von den Helpern
@@ -655,21 +549,21 @@ namespace Letzte_Zeugen.Controllers
             //Ids setzen um Verknüpfung zu haben
 
             formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
-
-            /*
-             formular.Modell.Standort = formular.Standort.ID;
-             formular.Modell.Erstellungsort = formular.Erstellungsort.ID;
-             formular.Modell.IDEigentuemer = formular.Eigentuemer.ID;
-             formular.Modell.IDUrheber = formular.Urheber.ID; */
             formular.Modell.IDAbbildung = formular.Abbildung.ID;
             formular.Modell.IDLink = formular.Link.ID;
-            _context.Update(formular.BeteiligteInstitute.Institute);
-            _context.SaveChangesAsync();
+            if(formular.BeteiligteInstitute.Institute != null)
+            {
+                _context.Update(formular.BeteiligteInstitute.Institute);
+                _context.SaveChangesAsync();
+            }
+            
+            
+
             //DOPPLUNGSCHECK
 
 
             // Dopplungscheck für Projekt beginnen
-            if (formular.Projekt.Projekt.Projekt1 != null && formular.Projekt.Projekt.Standort != null)
+            if (formular.Projekt.Projekt.Projekt1 != null && formular.Projekt.Projekt.Standort != null && (formular.Projekt.Projekt.Projekt1 != oldForm.Projekt.Projekt.Projekt1 || formular.Projekt.Projekt.Standort != oldForm.Projekt.Projekt.Standort))
             {
                 foreach (var item in _context.Projekt.ToList())
 
@@ -684,10 +578,15 @@ namespace Letzte_Zeugen.Controllers
                 if (formular.Modell.IDProjekt == null)
 
                 {
-                    _context.Update(formular.Projekt.Projekt); //hier wird Kontext erstellt
+                    _context.Add(formular.Projekt.Projekt); //hier wird Kontext erstellt
                     _context.SaveChanges();
                     formular.Modell.IDProjekt = formular.Projekt.Projekt.ID;
                 }
+            }
+            else
+            {
+                formular.Projekt.Projekt.Projekt1 = oldForm.Projekt.Projekt.Projekt1;
+                formular.Projekt.Projekt.Standort = oldForm.Projekt.Projekt.Standort;
             }
             //Dopplungscheck fürs Projekt fertig 
 
@@ -696,7 +595,7 @@ namespace Letzte_Zeugen.Controllers
             //BETEILIGTE INSTITUTE
 
             // Dopplungscheck für BeteilgiteInstitue beginnen
-            if (formular.BeteiligteInstitute.Institute.Name != null)
+            if (formular.BeteiligteInstitute.Institute.Name != null && formular.BeteiligteInstitute.Institute != oldForm.BeteiligteInstitute.Institute)
             {
                 foreach (var item in _context.Institute.ToList()) // Abfrage, ob es schon in Db existiert 
 
@@ -711,10 +610,14 @@ namespace Letzte_Zeugen.Controllers
                 if (formular.Modell.IDBeteiligteInstitute == null) // Abfrage, wenn nicht Vorhanden neue ID
 
                 {
-                    _context.Update(formular.BeteiligteInstitute); //hier wird Kontext erstellt (DB)
+                    _context.Add(formular.BeteiligteInstitute.Institute);
                     _context.SaveChanges();
                     formular.Modell.IDBeteiligteInstitute = formular.BeteiligteInstitute.Institute.ID;
                 }
+            }
+            else
+            {
+                formular.BeteiligteInstitute.Institute = oldForm.BeteiligteInstitute.Institute;
             }
             //Dopplungscheck für BeteilgiteInstitue fertig
 
@@ -727,10 +630,12 @@ namespace Letzte_Zeugen.Controllers
 
 
             formular.Modell.IDBeteiligteInstitute = formular.BeteiligteInstitute.Institute.ID;
+            //formular.Modell.ID = oldForm.Modell.ID;
+
+            _context.Remove(oldForm.Modell);
+            _context.Add(formular.Modell);
 
 
-
-            _context.Update(formular.Modell);
             await _context.SaveChangesAsync();
 
 
@@ -752,21 +657,30 @@ namespace Letzte_Zeugen.Controllers
                 if (arraypersonen[i] == null)
                 {
                     arraypersonen[i] = new Person()
-
                     {
                         NachnameVorname = personen[i]
                     };
 
-                    _context.Update(arraypersonen[i]);
+                    _context.Add(arraypersonen[i]);
                     await _context.SaveChangesAsync();
                 }
+                bool doubled = false;
+
                 BeteiligtePersonen temp = new BeteiligtePersonen()
                 {
 
                     IDModell = formular.Modell.ID,
                     IDPerson = arraypersonen[i].ID
                 };
-                _context.Update(temp);
+                foreach (var item in _context.BeteiligtePersonen)
+                {
+                    if (temp.IDPerson == item.IDPerson && temp.IDModell == item.IDModell)
+                    {
+                        doubled = true;
+                    }
+                }
+                if(!doubled)
+                _context.Add(temp);
             }
             await _context.SaveChangesAsync();
 
@@ -828,5 +742,68 @@ namespace Letzte_Zeugen.Controllers
         {
             return (_context.Modell?.Any(e => e.ID == id)).GetValueOrDefault();
         }
+
+        private Formular CreateFormByID(long id)
+        {
+            if (id == null || _context.Modell == null)
+            {
+                return null;
+            }
+
+            Modell modell = _context.Modell.Find(id);
+            if (modell == null)
+            {
+                return null;
+            }
+
+
+
+            Institute beteiligteInstitute = _context.Institute.Find(modell.IDBeteiligteInstitute);
+            Institute pruefInstitute = _context.Institute.Find(modell.IDPruefinstitut);
+            Projekt projekt = _context.Projekt.Find(modell.IDProjekt);
+
+            if (projekt == null)
+            {
+                projekt = new Projekt();
+            }
+
+            String Personenliste = "";
+
+            foreach (var item in _context.BeteiligtePersonen.ToList())
+            {
+                if (item.IDModell == modell.ID)
+
+                {
+                    Personenliste += _context.Person.Find(item.IDPerson).NachnameVorname + "; ";
+                }
+
+            }
+
+            Personenliste = Personenliste.Substring(0, Personenliste.Length - 2);
+
+            Formular formular = new Formular()
+            {
+                Modell = modell,
+                Abbildung = _context.Abbildung.Find(modell.IDAbbildung),
+                Bautypus = _context.Bautypus.Find(modell.IDBautypus),
+                Gefaehrdung = _context.Gefaehrdung.Find(modell.IDGefaehrdung),
+                BeteiligtePersonen = Personenliste,
+                Eigentuemer = _context.Person.Find(modell.IDEigentuemer),
+                Erstellungsort = _context.Ort.Find(modell.Erstellungsort),
+                Standort = _context.Ort.Find(modell.Standort),
+                BeteiligteInstitute = new InstitutHelper() { Institute = beteiligteInstitute, Ort = _context.Ort.Find(beteiligteInstitute.Koordinate) },
+                PruefInstitute = new InstitutHelper() { Institute = pruefInstitute, Ort = _context.Ort.Find(pruefInstitute.Koordinate) },
+                Material = _context.Material.Find(modell.IDMaterial),
+                Projekt = new ProjektHelper() { Projekt = projekt, Bauwerkort = _context.Ort.Find(projekt.Standort) },
+                Urheber = _context.Person.Find(modell.IDUrheber),
+                Existent = _context.Existent.Find(modell.IDExistent),
+                Zustand = _context.Zustand.Find(modell.IDZustand),
+                Messmodell = _context.Messmodell.Find(modell.IDMessmodell),
+                Realisiert = _context.Realisiert.Find(projekt.IDRealisiert),
+                Link = _context.Link.Find(modell.IDLink),
+            };
+            return formular;
+        }
     }
+
 }

@@ -9,6 +9,12 @@
 
 - Vorschlagsdroppdown
 
+- Bei Index alle Leeren Felder "-" in Tabelle
+
+- Laufzeit optimieren durch Dopplungschecks zusammenfassen
+
+- Person überarbeiten mit Nachname und Vorname getrennt, sowie dynaischers Formular
+
 - mehrere Bilder speichern
 
 - Dropdown aus DB ziehen
