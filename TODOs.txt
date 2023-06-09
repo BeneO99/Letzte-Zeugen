@@ -1,5 +1,8 @@
+- Bautypus Kuppel erg�nzen
 
-
+- mehrere Bilder speichern
+- mehrere Links speichern
+- mehrere PDF speichern
 
 - Bearbeiten im Nachhinein
 
@@ -9,18 +12,13 @@
 
 - Vorschlagsdroppdown
 
-- mehrere Bilder speichern
-- mehrere Links speichern
-- mehrere PDF speichern
-
 - Dropdown aus DB ziehen
 
 - Wenn Existent nein dann Zustnads + Gef�hrdungs droppdown weg mit nicht existent Daten eintragen oder null
 
-- Bautypus Kuppel erg�nzen
+
 
 - Accountverwaltung
 
 - Alles versteckt hinter anmeldung
 
-- 
