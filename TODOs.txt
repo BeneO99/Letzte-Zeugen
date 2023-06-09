@@ -5,17 +5,18 @@
 
 - Suchfunktion
 
-- Schöne Oberfläche mit Logo, passender Schrift, angepassten spalten
+- Schï¿½ne Oberflï¿½che mit Logo, passender Schrift, angepassten spalten
 
 - Vorschlagsdroppdown
 
 - mehrere Bilder speichern
+- mehrere Links speichern 
 
 - Dropdown aus DB ziehen
 
-- Wenn Existent nein dann Zustnads + Gefährdungs droppdown weg mit nicht existent Daten eintragen oder null
+- Wenn Existent nein dann Zustnads + Gefï¿½hrdungs droppdown weg mit nicht existent Daten eintragen oder null
 
-- Bautypus Kuppel ergänzen
+- Bautypus Kuppel ergï¿½nzen
 
 - Accountverwaltung
 
