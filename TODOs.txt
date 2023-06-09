@@ -12,6 +12,19 @@
 
 - Vorschlagsdroppdown
 
+<<<<<<< HEAD
+=======
+- Bei Index alle Leeren Felder "-" in Tabelle
+
+- Laufzeit optimieren durch Dopplungschecks zusammenfassen
+
+- Person überarbeiten mit Nachname und Vorname getrennt, sowie dynaischers Formular
+
+- mehrere Bilder speichern
+- mehrere Links speichern
+- mehrere PDF speichern
+
+>>>>>>> d86c76c1f7ff4fe8036d31bae4dcfc15699a1e21
 - Dropdown aus DB ziehen
 
 - Wenn Existent nein dann Zustnads + Gefï¿½hrdungs droppdown weg mit nicht existent Daten eintragen oder null
