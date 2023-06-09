@@ -11,6 +11,12 @@
 
 - mehrere Bilder speichern
 
+- Dropdown aus DB ziehen
+
+- Wenn Existent nein dann Zustnads + Gefährdungs droppdown weg mit nicht existent Daten eintragen oder null
+
+- Bautypus Kuppel ergänzen
+
 - Accountverwaltung
 
 - Alles versteckt hinter anmeldung
