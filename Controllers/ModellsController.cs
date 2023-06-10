@@ -485,11 +485,6 @@ namespace Letzte_Zeugen.Controllers
 
                 foreach (var item in _context.Person.ToList())
             {
-                //Dopplungscheck Eigentümer
-                if (formular.Eigentuemer.Name != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname))
-                {
-                    formular.Modell.IDEigentuemer = item.ID;
-                }
                 //Dopplungscheck Urheber
                 if (formular.Urheber.Nachname != null && formular.Urheber.Nachname != oldForm.Urheber.Nachname && item.Nachname.Equals(formular.Urheber.Nachname))
                 {
@@ -497,6 +492,14 @@ namespace Letzte_Zeugen.Controllers
                 }
 
             }
+
+                foreach (var item in _context.Eigentuemer.ToList())
+            {
+				if (formular.Eigentuemer.Name != null && formular.Eigentuemer.Name != oldForm.Eigentuemer.Name && item.Name.Equals(formular.Eigentuemer.Name))
+				{
+					formular.Modell.IDEigentuemer = item.ID;
+				}
+			}
 
             if (formular.Modell.IDEigentuemer == null) // Abfrage, wenn nicht Vorhanden neue ID
 
