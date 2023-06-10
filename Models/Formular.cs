@@ -13,7 +13,7 @@ namespace Letzte_Zeugen.Models
         public Bautypus Bautypus { get; set; }
         public Gefaehrdung Gefaehrdung { get; set; }
         public String? BeteiligtePersonen { get; set; }
-        public Person Eigentuemer { get; set; }
+        public Eigentuemer Eigentuemer { get; set; }
         public Ort Erstellungsort { get; set; }
         public Ort Standort { get; set; }
         public InstitutHelper BeteiligteInstitute { get; set; }

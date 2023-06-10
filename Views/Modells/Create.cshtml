@@ -168,20 +168,23 @@
 			<div class="form-group">
 				<label asp-for="Modell.IDPruefinstitut" class="control-label">Prüfinstitut Name</label>
 				<select asp-for="Modell.IDPruefinstitut">
-					<option value="1 " selected="selected">unbekannt</option>
-					<option value="2">ISMES / today CESI</option>
-					<option value="3">MPA</option>
-					<option value="4">LNEC</option>
-					<option value="5">LCEMC</option>
+					<option value="7" selected="selected">unbekannt</option>
+					<option value="1">ISMES / today CESI</option>
+					<option value="2">MPA</option>
+					<option value="3">LNEC</option>
+					<option value="4">LCEMC</option>
 					<option value="5">Laboratorio Prove Modelli e Construzioni Milano</option>
+					<option value="8">Institut für Modellbaustatik Stuttgart</option>
+					<option value="9">ILEK</option>
+					<option value="10">IL</option>
 				</select>
 				<span asp-validation-for="Modell.IDPruefinstitut" class="text-danger"></span>
 			</div>
 
 			<div class="form-group">
-				<label asp-for="Eigentuemer.Nachname" class="control-label">Eigentümer Nachname, Vorname</label>
-				<input asp-for="Eigentuemer.Nachname" class="form-control" />
-				<span asp-validation-for="Eigentuemer.Nachname" class="text-danger"></span>
+				<label asp-for="Eigentuemer.Name" class="control-label">Eigentümer Nachname, Vorname</label>
+				<input asp-for="Eigentuemer.Name" class="form-control" />
+				<span asp-validation-for="Eigentuemer.Name" class="text-danger"></span>
 			</div>
 
 
