@@ -8,6 +8,4 @@ public partial class Existent
     public long ID { get; set; }
 
     public string? Existent1 { get; set; }
-
-    public virtual ICollection<Modell> Modell { get; } = new List<Modell>();
 }

@@ -10,10 +10,9 @@ namespace Letzte_Zeugen.Models
 
         public Modell Modell { get; set; }
 
-        public Abbildung Abbildung { get; set; }
         public Bautypus Bautypus { get; set; }
         public Gefaehrdung Gefaehrdung { get; set; }
-        public String BeteiligtePersonen { get; set; }
+        public String? BeteiligtePersonen { get; set; }
         public Person Eigentuemer { get; set; }
         public Ort Erstellungsort { get; set; }
         public Ort Standort { get; set; }
@@ -28,6 +27,8 @@ namespace Letzte_Zeugen.Models
         public Realisiert Realisiert { get; set; }
         public List<Person> Personenliste { get; set; }
         public Link Link { get; set; }
+
+        public IFormFile Picture { get; set; }
 
     }
 

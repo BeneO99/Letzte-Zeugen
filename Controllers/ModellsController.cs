@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Letzte_Zeugen.Db;
 using Letzte_Zeugen.Models;
+using backend.Helpers;
 
 namespace Letzte_Zeugen.Controllers
 {
@@ -49,26 +50,9 @@ namespace Letzte_Zeugen.Controllers
                 return NotFound();
             }
 
-            var modell = await _context.Modell
-                .Include(m => m.ErstellungsortNavigation)
-                .Include(m => m.IDAbbildungNavigation)
-                .Include(m => m.IDBautypusNavigation)
-                .Include(m => m.IDBeteiligteInstituteNavigation)
-                .Include(m => m.IDEigentuemerNavigation)
-                .Include(m => m.IDGefaehrdungNavigation)
-                .Include(m => m.IDMaterialNavigation)
-                .Include(m => m.IDProjektNavigation)
-                .Include(m => m.IDPruefinstitutNavigation)
-                .Include(m => m.IDUrheberNavigation)
-                .Include(m => m.StandortNavigation)
-                .Include(m => m.IDLinkNavigation)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (modell == null)
-            {
-                return NotFound();
-            }
+            
 
-            return View(modell);
+            return View(null);
         }
 
         // GET: Modells/Create
@@ -238,8 +222,6 @@ namespace Letzte_Zeugen.Controllers
 
 
             //unterste ebene hinzufügen
-
-            _context.Add(formular.Abbildung);
             _context.Add(formular.Link);
             _context.SaveChangesAsync(); //speichern um IDs automatisiert legen zu lassen
 
@@ -248,7 +230,6 @@ namespace Letzte_Zeugen.Controllers
             //Ids setzen um Verknüpfung zu haben
           
             formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
-            formular.Modell.IDAbbildung = formular.Abbildung.ID;
             formular.Modell.IDLink = formular.Link.ID;
             _context.Add(formular.BeteiligteInstitute.Institute);
             _context.SaveChangesAsync();
@@ -321,40 +302,49 @@ namespace Letzte_Zeugen.Controllers
             await _context.SaveChangesAsync();
 
 
- //Mehrfach Namen Eintragen bei Beteiligte Personen 
+            //Bilder speichern
+            StoreHelper.SaveModellImage(formular.Picture, formular.Modell.ID);
 
-            String[] personen = formular.BeteiligtePersonen.Split(";");
-            Person[] arraypersonen = new Person[personen.Length];
-            for (int i = 0; i < personen.Length; i++)
 
+
+            //Mehrfach Namen Eintragen bei Beteiligte Personen 
+            if(formular.BeteiligtePersonen != null)
             {
-                foreach (var item in _context.Person.ToList())
-                {
-                    if (item.NachnameVorname.Equals(personen[i]))
-                    {
-                        arraypersonen[i] = item;
-                    }
-                }
+				String[] personen = formular.BeteiligtePersonen.Split(";");
+				Person[] arraypersonen = new Person[personen.Length];
+				for (int i = 0; i < personen.Length; i++)
 
-                if (arraypersonen[i] == null)
-                {
-                    arraypersonen[i] = new Person()
+				{
+					foreach (var item in _context.Person.ToList())
+					{
+						if (item.NachnameVorname.Equals(personen[i]))
+						{
+							arraypersonen[i] = item;
+						}
+					}
 
-                    {
-                        NachnameVorname = personen[i]
-                    };
+					if (arraypersonen[i] == null)
+					{
+						arraypersonen[i] = new Person()
 
-                    _context.Add(arraypersonen[i]);
-                    await _context.SaveChangesAsync();
-                }
-                BeteiligtePersonen temp = new BeteiligtePersonen()
-                {
+						{
+							NachnameVorname = personen[i]
+						};
 
-                    IDModell = formular.Modell.ID, IDPerson = arraypersonen[i].ID
-                };
-                _context.Add(temp);
-            }
-            await _context.SaveChangesAsync();
+						_context.Add(arraypersonen[i]);
+						await _context.SaveChangesAsync();
+					}
+					BeteiligtePersonen temp = new BeteiligtePersonen()
+					{
+
+						IDModell = formular.Modell.ID,
+						IDPerson = arraypersonen[i].ID
+					};
+					_context.Add(temp);
+				}
+				await _context.SaveChangesAsync();
+			}
+            
 
             return RedirectToAction(nameof(Index));
 
@@ -524,15 +514,7 @@ namespace Letzte_Zeugen.Controllers
 
 
             //unterste ebene hinzufügen
-            if(formular.Abbildung != oldForm.Abbildung)
-            {
-                _context.Remove(oldForm.Abbildung);
-                _context.Add(formular.Abbildung);
-            }
-            else
-            {
-                formular.Abbildung = oldForm.Abbildung;
-            }
+
             if(formular.Link != oldForm.Link)
             {
                 _context.Remove(oldForm.Link); 
@@ -549,7 +531,6 @@ namespace Letzte_Zeugen.Controllers
             //Ids setzen um Verknüpfung zu haben
 
             formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
-            formular.Modell.IDAbbildung = formular.Abbildung.ID;
             formular.Modell.IDLink = formular.Link.ID;
             if(formular.BeteiligteInstitute.Institute != null)
             {
@@ -697,26 +678,8 @@ namespace Letzte_Zeugen.Controllers
                 return NotFound();
             }
 
-            var modell = await _context.Modell
-                .Include(m => m.ErstellungsortNavigation)
-                .Include(m => m.IDAbbildungNavigation)
-                .Include(m => m.IDBautypusNavigation)
-                .Include(m => m.IDBeteiligteInstituteNavigation)
-                .Include(m => m.IDEigentuemerNavigation)
-                .Include(m => m.IDGefaehrdungNavigation)
-                .Include(m => m.IDMaterialNavigation)
-                .Include(m => m.IDProjektNavigation)
-                .Include(m => m.IDPruefinstitutNavigation)
-                .Include(m => m.IDUrheberNavigation)
-                .Include(m => m.StandortNavigation)
-                .Include(m => m.IDLinkNavigation)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (modell == null)
-            {
-                return NotFound();
-            }
-
-            return View(modell);
+  
+            return View(null);
         }
 
         // POST: Modells/Delete/5
@@ -778,13 +741,15 @@ namespace Letzte_Zeugen.Controllers
                 }
 
             }
-
-            Personenliste = Personenliste.Substring(0, Personenliste.Length - 2);
+            if(Personenliste.Length > 2) 
+            {
+                Personenliste = Personenliste.Substring(0, Personenliste.Length - 2);
+            }
+            
 
             Formular formular = new Formular()
             {
                 Modell = modell,
-                Abbildung = _context.Abbildung.Find(modell.IDAbbildung),
                 Bautypus = _context.Bautypus.Find(modell.IDBautypus),
                 Gefaehrdung = _context.Gefaehrdung.Find(modell.IDGefaehrdung),
                 BeteiligtePersonen = Personenliste,

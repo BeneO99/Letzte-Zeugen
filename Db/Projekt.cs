@@ -14,6 +14,4 @@ public partial class Projekt
     public long? IDRealisiert { get; set; }
 
     public virtual Realisiert? IDRealisiertNavigation { get; set; }
-
-    public virtual ICollection<Modell> Modell { get; } = new List<Modell>();
 }

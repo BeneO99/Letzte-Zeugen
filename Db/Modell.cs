@@ -5,9 +5,9 @@ namespace Letzte_Zeugen.Db;
 
 public partial class Modell
 {
-    public string? Ausschnitt { get; set; }
-
     public long ID { get; set; }
+
+    public string? Ausschnitt { get; set; }
 
     public string? Bezeichnung { get; set; }
 
@@ -53,37 +53,5 @@ public partial class Modell
 
     public long? IDBeteiligteInstitute { get; set; }
 
-    public long? IDAbbildung { get; set; }
-
     public long? IDLink { get; set; }
-
-    public virtual Ort? ErstellungsortNavigation { get; set; }
-
-    public virtual Abbildung? IDAbbildungNavigation { get; set; }
-
-    public virtual Bautypus? IDBautypusNavigation { get; set; }
-
-    public virtual Institute? IDBeteiligteInstituteNavigation { get; set; }
-
-    public virtual Person? IDEigentuemerNavigation { get; set; }
-
-    public virtual Existent? IDExistentNavigation { get; set; }
-
-    public virtual Gefaehrdung? IDGefaehrdungNavigation { get; set; }
-
-    public virtual Link? IDLinkNavigation { get; set; }
-
-    public virtual Material? IDMaterialNavigation { get; set; }
-
-    public virtual Messmodell? IDMessmodellNavigation { get; set; }
-
-    public virtual Projekt? IDProjektNavigation { get; set; }
-
-    public virtual Institute? IDPruefinstitutNavigation { get; set; }
-
-    public virtual Person? IDUrheberNavigation { get; set; }
-
-    public virtual Zustand? IDZustandNavigation { get; set; }
-
-    public virtual Ort? StandortNavigation { get; set; }
 }

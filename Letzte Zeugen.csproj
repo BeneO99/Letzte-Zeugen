@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="database\" />
+    <Folder Include="database\image-data\" />
   </ItemGroup>
 
 </Project>

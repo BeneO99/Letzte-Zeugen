@@ -10,6 +10,4 @@ public partial class Link
     public string? LinkTitel { get; set; }
 
     public string? LinkPfad { get; set; }
-
-    public virtual ICollection<Modell> Modell { get; } = new List<Modell>();
 }

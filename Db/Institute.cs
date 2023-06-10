@@ -12,8 +12,4 @@ public partial class Institute
     public long? Koordinate { get; set; }
 
     public virtual Ort? KoordinateNavigation { get; set; }
-
-    public virtual ICollection<Modell> ModellIDBeteiligteInstituteNavigation { get; } = new List<Modell>();
-
-    public virtual ICollection<Modell> ModellIDPruefinstitutNavigation { get; } = new List<Modell>();
 }

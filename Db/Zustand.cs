@@ -8,6 +8,4 @@ public partial class Zustand
     public long ID { get; set; }
 
     public string? Zustand1 { get; set; }
-
-    public virtual ICollection<Modell> Modell { get; } = new List<Modell>();
 }

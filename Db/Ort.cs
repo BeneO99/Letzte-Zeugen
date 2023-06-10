@@ -10,8 +10,4 @@ public partial class Ort
     public string? Koordinate { get; set; }
 
     public virtual ICollection<Institute> Institute { get; } = new List<Institute>();
-
-    public virtual ICollection<Modell> ModellErstellungsortNavigation { get; } = new List<Modell>();
-
-    public virtual ICollection<Modell> ModellStandortNavigation { get; } = new List<Modell>();
 }

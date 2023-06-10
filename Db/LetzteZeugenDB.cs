@@ -15,11 +15,11 @@ public partial class LetzteZeugenDB : DbContext
     {
     }
 
-    public virtual DbSet<Abbildung> Abbildung { get; set; }
-
     public virtual DbSet<Bautypus> Bautypus { get; set; }
 
     public virtual DbSet<BeteiligtePersonen> BeteiligtePersonen { get; set; }
+
+    public virtual DbSet<Eigentuemer> Eigentuemer { get; set; }
 
     public virtual DbSet<Existent> Existent { get; set; }
 
@@ -69,6 +69,7 @@ public partial class LetzteZeugenDB : DbContext
 
         modelBuilder.Entity<Gefaehrdung>(entity =>
         {
+            entity.Property(e => e.ID).ValueGeneratedNever();
             entity.Property(e => e.Gefaehrdung1).HasColumnName("Gefaehrdung");
         });
 
@@ -87,39 +88,6 @@ public partial class LetzteZeugenDB : DbContext
             entity.HasIndex(e => e.ID, "IX_Messmodell_ID").IsUnique();
 
             entity.Property(e => e.Messmodell1).HasColumnName("Messmodell");
-        });
-
-        modelBuilder.Entity<Modell>(entity =>
-        {
-            entity.HasOne(d => d.ErstellungsortNavigation).WithMany(p => p.ModellErstellungsortNavigation).HasForeignKey(d => d.Erstellungsort);
-
-            entity.HasOne(d => d.IDAbbildungNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDAbbildung);
-
-            entity.HasOne(d => d.IDBautypusNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDBautypus);
-
-            entity.HasOne(d => d.IDBeteiligteInstituteNavigation).WithMany(p => p.ModellIDBeteiligteInstituteNavigation).HasForeignKey(d => d.IDBeteiligteInstitute);
-
-            entity.HasOne(d => d.IDEigentuemerNavigation).WithMany(p => p.ModellIDEigentuemerNavigation).HasForeignKey(d => d.IDEigentuemer);
-
-            entity.HasOne(d => d.IDExistentNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDExistent);
-
-            entity.HasOne(d => d.IDGefaehrdungNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDGefaehrdung);
-
-            entity.HasOne(d => d.IDLinkNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDLink);
-
-            entity.HasOne(d => d.IDMaterialNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDMaterial);
-
-            entity.HasOne(d => d.IDMessmodellNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDMessmodell);
-
-            entity.HasOne(d => d.IDProjektNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDProjekt);
-
-            entity.HasOne(d => d.IDPruefinstitutNavigation).WithMany(p => p.ModellIDPruefinstitutNavigation).HasForeignKey(d => d.IDPruefinstitut);
-
-            entity.HasOne(d => d.IDUrheberNavigation).WithMany(p => p.ModellIDUrheberNavigation).HasForeignKey(d => d.IDUrheber);
-
-            entity.HasOne(d => d.IDZustandNavigation).WithMany(p => p.Modell).HasForeignKey(d => d.IDZustand);
-
-            entity.HasOne(d => d.StandortNavigation).WithMany(p => p.ModellStandortNavigation).HasForeignKey(d => d.Standort);
         });
 
         modelBuilder.Entity<Projekt>(entity =>

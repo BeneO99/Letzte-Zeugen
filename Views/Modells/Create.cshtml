@@ -1,13 +1,13 @@
 ﻿@model Letzte_Zeugen.Models.Formular
 
 @{
-    ViewData["Title"] = "Letzte Zeugen Datenbank";
+	ViewData["Title"] = "Letzte Zeugen Datenbank";
 }
 
 
 <head>
-    <meta charset= "utf-8"/>
-    <link rel= "stylesheet" href =" Create.styles.css" />
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href=" Create.styles.css" />
 
 </head>
 
@@ -18,275 +18,271 @@
 <h4>Modell hinzufügen</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+	<div class="col-md-4">
 
-        <form asp-action="Create">
-
-
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-            <div class="form-group">
-                <label asp-for="Modell.Bezeichnung" class="control-label"></label>
-                <input asp-for="Modell.Bezeichnung" class="form-control" />
-                <span asp-validation-for="Modell.Bezeichnung" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="Modell.IDMessmodell" class="control-label">Messmodell</label>
-                <select asp-for="Modell.IDMessmodell">
-                    <option value="1" selected="selected">ja</option>
-                    <option value="2">nein</option>
-                    <option value="3">unbekannt</option>
-                </select>
-                <span asp-validation-for="Modell.IDMessmodell" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Modell.IDExistent" class="control-label">Existent</label>
-                <select asp-for="Modell.IDExistent">
-                    <option value="1" selected="selected">ja</option>
-                    <option value="2">nein</option>
-                    <option value="3">unbekannt</option>
-                </select>
-                <span asp-validation-for="Modell.IDExistent" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="Modell.Massstab" class="control-label"> Maßstab</label>
-                <input asp-for="Modell.Massstab" class="form-control" />
-                <span asp-validation-for="Modell.Massstab" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="Modell.Ausschnitt" class="control-label"></label>
-                <input asp-for="Modell.Ausschnitt" class="form-control" />
-                <span asp-validation-for="Modell.Ausschnitt" class="text-danger"></span>
-            </div>
-
-
-            <!--ZOE hier haben wir den Dropdown als Beispiel verändert-->
+		<form asp-action="Create" enctype="multipart/form-data">
 
 
 
-<div class="form-group">
-    <label asp-for="Modell.IDZustand" class="control-label">Zustand</label>
-    <select asp-for="Modell.IDZustand">
-        <option value="1" selected="selected">Gut</option>
-        <option value="2">Mittelmäßig</option>
-        <option value="3">Schlecht</option>
-        <option value="4">Unbekannt</option>
-
-    </select>
-    <span asp-validation-for="Modell.IDZustand" class="text-danger"></span>
-</div>
-<!--hier ende -->
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-<div class="form-group">
-    <label asp-for="Modell.ErstellungszeitraumModell" class="control-label"> Erstellungszeitraum</label>
-    <input asp-for="Modell.ErstellungszeitraumModell" class="form-control" />
-    <span asp-validation-for="Modell.ErstellungszeitraumModell" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.Bezeichnung" class="control-label"></label>
+				<input asp-for="Modell.Bezeichnung" class="form-control" />
+				<span asp-validation-for="Modell.Bezeichnung" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Modell.AbmessungenLxBxH" class="control-label">Abmessungen LxBxH</label>
-    <input asp-for="Modell.AbmessungenLxBxH" class="form-control" />
-    <span asp-validation-for="Modell.AbmessungenLxBxH" class="text-danger"></span>
-</div>
 
-<div class="form-group">
-    <label asp-for="Modell.IDMaterial" class="control-label">Material</label>
-    <select asp-for="Modell.IDMaterial">
-        <option value="1" selected="selected">Kunststoff</option>
-        <option value="2">Holz</option>
-        <option value="3">Metall</option>
-        <option value="4">Beton</option>
-    </select>
-    <span asp-validation-for="Modell.IDMaterial" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.IDMessmodell" class="control-label">Messmodell</label>
+				<select asp-for="Modell.IDMessmodell">
+					<option value="1" selected="selected">ja</option>
+					<option value="2">nein</option>
+					<option value="3">unbekannt</option>
+				</select>
+				<span asp-validation-for="Modell.IDMessmodell" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Modell.IDBautypus" class="control-label">Bautypus</label>
-    <select asp-for="Modell.IDBautypus">
-        <option value="1" selected="selected">Brücke</option>
-        <option value="2">Schale</option>
-        <option value="3">Gitternetz</option>
-        <option value="4">Staudamm</option>
-    </select>
-    <span asp-validation-for="Modell.IDBautypus" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.IDExistent" class="control-label">Existent</label>
+				<select asp-for="Modell.IDExistent">
+					<option value="1" selected="selected">ja</option>
+					<option value="2">nein</option>
+					<option value="3">unbekannt</option>
+				</select>
+				<span asp-validation-for="Modell.IDExistent" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Modell.IDGefaehrdung" class="control-label">Gefährdung</label>
-    <select asp-for="Modell.IDGefaehrdung">
-        <option value="1" selected="selected">Rot</option>
-        <option value="2">Gelb</option>
-        <option value="3">Grün</option>
-        <option value="4">Unbekannt</option>
-    </select>
-    <span asp-validation-for="Modell.IDGefaehrdung" class="text-danger"></span>
-</div>
 
-<div class="form-group">
-    <label asp-for="Urheber.NachnameVorname" class="control-label">Urheber Nachname, Vorname</label>
-    <input asp-for="Urheber.NachnameVorname" class="form-control" />
-    <span asp-validation-for="Urheber.NachnameVorname" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.Massstab" class="control-label"> Maßstab</label>
+				<input asp-for="Modell.Massstab" class="form-control" />
+				<span asp-validation-for="Modell.Massstab" class="text-danger"></span>
+			</div>
+
+
+			<div class="form-group">
+				<label asp-for="Modell.Ausschnitt" class="control-label"></label>
+				<input asp-for="Modell.Ausschnitt" class="form-control" />
+				<span asp-validation-for="Modell.Ausschnitt" class="text-danger"></span>
+			</div>
+
+
+			<!--ZOE hier haben wir den Dropdown als Beispiel verändert-->
 
 
 
-<div class="form-group">
-    <label asp-for="Erstellungsort.Koordinate" class="control-label">Erstellungsort</label>
-    <input asp-for="Erstellungsort.Koordinate" class="form-control" />
-    <span asp-validation-for="Erstellungsort.Koordinate" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.IDZustand" class="control-label">Zustand</label>
+				<select asp-for="Modell.IDZustand">
+					<option value="1" selected="selected">Gut</option>
+					<option value="2">Mittelmäßig</option>
+					<option value="3">Schlecht</option>
+					<option value="4">Unbekannt</option>
 
-<div class="form-group">
-    <label asp-for="BeteiligtePersonen" class="control-label">Beteiligte Personen</label>
-    <input asp-for="BeteiligtePersonen" class="form-control" />
-    <span asp-validation-for="BeteiligtePersonen" class="text-danger"></span>
-</div>
-
-
-<div class="form-group">
-    <label asp-for="BeteiligteInstitute.Institute.Name" class="control-label">Beteiligte Institute Name</label>
-    <input asp-for="BeteiligteInstitute.Institute.Name" class="form-control" />
-    <span asp-validation-for="BeteiligteInstitute.Institute.Name" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="BeteiligteInstitute.Ort.Koordinate" class="control-label">Beteiligte Institute Standort</label>
-    <input asp-for="BeteiligteInstitute.Ort.Koordinate" class="form-control" />
-    <span asp-validation-for="BeteiligteInstitute.Ort.Koordinate" class="text-danger"></span>
-</div>
-
-<div class="form-group">
-    <label asp-for="Modell.IDPruefinstitut" class="control-label">Prüfinstitut Name</label>
-    <select asp-for="Modell.IDPruefinstitut">
-        <option value="1 " selected="selected">unbekannt</option>
-        <option value="2">ISMES / today CESI</option>
-        <option value="3">MPA</option>
-        <option value="4">LNEC</option>
-        <option value="5">LCEMC</option>
-        <option value="5">Laboratorio Prove Modelli e Construzioni Milano</option>
-    </select>
-    <span asp-validation-for="Modell.IDPruefinstitut" class="text-danger"></span>
-</div>
-
-<div class="form-group">
-    <label asp-for="Eigentuemer.NachnameVorname" class="control-label">Eigentümer Nachname, Vorname</label>
-    <input asp-for="Eigentuemer.NachnameVorname" class="form-control" />
-    <span asp-validation-for="Eigentuemer.NachnameVorname" class="text-danger"></span>
-</div>
+				</select>
+				<span asp-validation-for="Modell.IDZustand" class="text-danger"></span>
+			</div>
+			<!--hier ende -->
 
 
+			<div class="form-group">
+				<label asp-for="Modell.ErstellungszeitraumModell" class="control-label"> Erstellungszeitraum</label>
+				<input asp-for="Modell.ErstellungszeitraumModell" class="form-control" />
+				<span asp-validation-for="Modell.ErstellungszeitraumModell" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Modell.AbmessungenLxBxH" class="control-label">Abmessungen LxBxH</label>
+				<input asp-for="Modell.AbmessungenLxBxH" class="form-control" />
+				<span asp-validation-for="Modell.AbmessungenLxBxH" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Modell.IDMaterial" class="control-label">Material</label>
+				<select asp-for="Modell.IDMaterial">
+					<option value="1" selected="selected">Kunststoff</option>
+					<option value="2">Holz</option>
+					<option value="3">Metall</option>
+					<option value="4">Beton</option>
+				</select>
+				<span asp-validation-for="Modell.IDMaterial" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Modell.IDBautypus" class="control-label">Bautypus</label>
+				<select asp-for="Modell.IDBautypus">
+					<option value="1" selected="selected">Brücke</option>
+					<option value="2">Schale</option>
+					<option value="3">Gitternetz</option>
+					<option value="4">Staudamm</option>
+				</select>
+				<span asp-validation-for="Modell.IDBautypus" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Modell.IDGefaehrdung" class="control-label">Gefährdung</label>
+				<select asp-for="Modell.IDGefaehrdung">
+					<option value="1" selected="selected">Rot</option>
+					<option value="2">Gelb</option>
+					<option value="3">Grün</option>
+					<option value="4">Unbekannt</option>
+				</select>
+				<span asp-validation-for="Modell.IDGefaehrdung" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Urheber.NachnameVorname" class="control-label">Urheber Nachname, Vorname</label>
+				<input asp-for="Urheber.NachnameVorname" class="form-control" />
+				<span asp-validation-for="Urheber.NachnameVorname" class="text-danger"></span>
+			</div>
 
 
-<div class="form-group">
-    <label asp-for="Standort.Koordinate" class="control-label"> Heutiger Standort</label>
-    <input asp-for="Standort.Koordinate" class="form-control" />
-    <span asp-validation-for="Standort.Koordinate" class="text-danger"></span>
-</div>
+
+			<div class="form-group">
+				<label asp-for="Erstellungsort.Koordinate" class="control-label">Erstellungsort</label>
+				<input asp-for="Erstellungsort.Koordinate" class="form-control" />
+				<span asp-validation-for="Erstellungsort.Koordinate" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="BeteiligtePersonen" class="control-label">Beteiligte Personen</label>
+				<input asp-for="BeteiligtePersonen" class="form-control" />
+				<span asp-validation-for="BeteiligtePersonen" class="text-danger"></span>
+			</div>
 
 
-<div class="form-group">
-    <label asp-for="Projekt.Projekt.IDRealisiert" class="control-label">Bauwerk Realisiert</label>
-    <select asp-for="Projekt.Projekt.IDRealisiert">
-        <option value="1" selected="selected">ja</option>
-        <option value="2">nein</option>
-        <option value="3">unbekannt</option>
-    </select>
-    <span asp-validation-for="Projekt.Projekt.IDRealisiert" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="BeteiligteInstitute.Institute.Name" class="control-label">Beteiligte Institute Name</label>
+				<input asp-for="BeteiligteInstitute.Institute.Name" class="form-control" />
+				<span asp-validation-for="BeteiligteInstitute.Institute.Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="BeteiligteInstitute.Ort.Koordinate" class="control-label">Beteiligte Institute Standort</label>
+				<input asp-for="BeteiligteInstitute.Ort.Koordinate" class="form-control" />
+				<span asp-validation-for="BeteiligteInstitute.Ort.Koordinate" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Projekt.Projekt.Projekt1" class="control-label">Bauwerk Name</label>
-    <input asp-for="Projekt.Projekt.Projekt1" class="form-control" />
-    <span asp-validation-for="Projekt.Projekt.Projekt1" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.IDPruefinstitut" class="control-label">Prüfinstitut Name</label>
+				<select asp-for="Modell.IDPruefinstitut">
+					<option value="1 " selected="selected">unbekannt</option>
+					<option value="2">ISMES / today CESI</option>
+					<option value="3">MPA</option>
+					<option value="4">LNEC</option>
+					<option value="5">LCEMC</option>
+					<option value="5">Laboratorio Prove Modelli e Construzioni Milano</option>
+				</select>
+				<span asp-validation-for="Modell.IDPruefinstitut" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Modell.ErstellungszeiraumBauwerk" class="control-label">Bauwerk Erstellungszeitraum</label>
-    <input asp-for="Modell.ErstellungszeiraumBauwerk" class="form-control" />
-    <span asp-validation-for="Modell.ErstellungszeiraumBauwerk" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Eigentuemer.NachnameVorname" class="control-label">Eigentümer Nachname, Vorname</label>
+				<input asp-for="Eigentuemer.NachnameVorname" class="form-control" />
+				<span asp-validation-for="Eigentuemer.NachnameVorname" class="text-danger"></span>
+			</div>
 
 
 
 
-<div class="form-group">
-    <label asp-for="Projekt.Bauwerkort.Koordinate" class="control-label">Bauwerk Standort</label>
-    <input asp-for="Projekt.Bauwerkort.Koordinate" class="form-control" />
-    <span asp-validation-for="Projekt.Bauwerkort.Koordinate" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Standort.Koordinate" class="control-label"> Heutiger Standort</label>
+				<input asp-for="Standort.Koordinate" class="form-control" />
+				<span asp-validation-for="Standort.Koordinate" class="text-danger"></span>
+			</div>
 
 
-<div class="form-group">
-    <label asp-for="Modell.Spannweite" class="control-label">Bauwerk Spannweite</label>
-    <input asp-for="Modell.Spannweite" class="form-control" />
-    <span asp-validation-for="Modell.Spannweite" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Projekt.Projekt.IDRealisiert" class="control-label">Bauwerk Realisiert</label>
+				<select asp-for="Projekt.Projekt.IDRealisiert">
+					<option value="1" selected="selected">ja</option>
+					<option value="2">nein</option>
+					<option value="3">unbekannt</option>
+				</select>
+				<span asp-validation-for="Projekt.Projekt.IDRealisiert" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Projekt.Projekt.Projekt1" class="control-label">Bauwerk Name</label>
+				<input asp-for="Projekt.Projekt.Projekt1" class="form-control" />
+				<span asp-validation-for="Projekt.Projekt.Projekt1" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Modell.ErstellungszeiraumBauwerk" class="control-label">Bauwerk Erstellungszeitraum</label>
+				<input asp-for="Modell.ErstellungszeiraumBauwerk" class="form-control" />
+				<span asp-validation-for="Modell.ErstellungszeiraumBauwerk" class="text-danger"></span>
+			</div>
 
 
 
 
-<div class="form-group">
-    <label asp-for="Abbildung.Titel" class="control-label">Abbildung Titel</label>
-    <input asp-for="Abbildung.Titel" class="form-control" />
-    <span asp-validation-for="Abbildung.Titel" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Abbildung.Pfad" class="control-label">Abbildung Pfad</label>
-    <input asp-for="Abbildung.Pfad" class="form-control" />
-    <span asp-validation-for="Abbildung.Pfad" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Projekt.Bauwerkort.Koordinate" class="control-label">Bauwerk Standort</label>
+				<input asp-for="Projekt.Bauwerkort.Koordinate" class="form-control" />
+				<span asp-validation-for="Projekt.Bauwerkort.Koordinate" class="text-danger"></span>
+			</div>
+
+
+			<div class="form-group">
+				<label asp-for="Modell.Spannweite" class="control-label">Bauwerk Spannweite</label>
+				<input asp-for="Modell.Spannweite" class="form-control" />
+				<span asp-validation-for="Modell.Spannweite" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Picture" class="control-label">Bild Upload</label> </br>
+				<input asp-for="Picture" type="file" id="picInput" accept="image/*"/>
+				<span asp-validation-for="Picture" class="text-danger"></span>
+			</div>
 
 
 
 
-<div class="form-group">
-    <label asp-for="Modell.Kapitel" class="control-label">Kapitel</label>
-    <input asp-for="Modell.Kapitel" class="form-control" />
-    <span asp-validation-for="Modell.Kapitel" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Modell.Seitenzahl" class="control-label">Seitenzahl</label>
-    <input asp-for="Modell.Seitenzahl" class="form-control" />
-    <span asp-validation-for="Modell.Seitenzahl" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.Kapitel" class="control-label">Kapitel</label>
+				<input asp-for="Modell.Kapitel" class="form-control" />
+				<span asp-validation-for="Modell.Kapitel" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Modell.Seitenzahl" class="control-label">Seitenzahl</label>
+				<input asp-for="Modell.Seitenzahl" class="form-control" />
+				<span asp-validation-for="Modell.Seitenzahl" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Modell.BauwerkLink" class="control-label">Bauwerk Link</label>
-    <input asp-for="Modell.BauwerkLink" class="form-control" />
-    <span asp-validation-for="Modell.BauwerkLink" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Modell.BauwerkLink" class="control-label">Bauwerk Link</label>
+				<input asp-for="Modell.BauwerkLink" class="form-control" />
+				<span asp-validation-for="Modell.BauwerkLink" class="text-danger"></span>
+			</div>
 
-<div class="form-group">
-    <label asp-for="Link.LinkTitel" class="control-label">Link Titel</label>
-    <input asp-for="Link.LinkTitel" class="form-control" />
-    <span asp-validation-for="Link.LinkTitel" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Link.LinkPfad" class="control-label">Link Pfad</label>
-    <input asp-for="Link.LinkPfad" class="form-control" />
-    <span asp-validation-for="Link.LinkPfad" class="text-danger"></span>
-</div>
+			<div class="form-group">
+				<label asp-for="Link.LinkTitel" class="control-label">Link Titel</label>
+				<input asp-for="Link.LinkTitel" class="form-control" />
+				<span asp-validation-for="Link.LinkTitel" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Link.LinkPfad" class="control-label">Link Pfad</label>
+				<input asp-for="Link.LinkPfad" class="form-control" />
+				<span asp-validation-for="Link.LinkPfad" class="text-danger"></span>
+			</div>
 
-<input type="submit" value="Hinzufügen" class="button-middle button-green" />
 
-        </form>
-</div>
+
+			<input type="submit" value="Hinzufügen" class="button-middle button-green" />
+
+		</form>
+	</div>
 </div>
 
 
 <div>
-    <a asp-action="Index">Zurück zur Liste</a>
+	<a asp-action="Index">Zurück zur Liste</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
