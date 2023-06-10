@@ -174,12 +174,12 @@ namespace Letzte_Zeugen.Controllers
          //DOPPLUNGSCHECK PERSONEN
 
             // Dopplungscheck für Eigentuemer beginnen
-            if (formular.Eigentuemer.NachnameVorname != null)
+            if (formular.Eigentuemer.Name != null)
             {
-                foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
+                foreach (var item in _context.Eigentuemer.ToList()) // Abfrage, ob es schon in Db existiert 
 
                 {
-                    if (item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname)) //wenn gleich dann ID von gleichem 
+                    if (item.Name.Equals(formular.Eigentuemer.Name)) //wenn gleich dann ID von gleichem 
 
                     {
                         formular.Modell.IDEigentuemer = item.ID; // wo fremdschlüssel liegt
@@ -464,9 +464,9 @@ namespace Letzte_Zeugen.Controllers
 
             //DOPPLUNGSCHECK PERSONEN
 
-            if(formular.Eigentuemer.NachnameVorname != null && oldForm.Eigentuemer.NachnameVorname != null)
+            if(formular.Eigentuemer.Name != null && oldForm.Eigentuemer.Name != null)
             {
-                if(formular.Eigentuemer.NachnameVorname == oldForm.Eigentuemer.NachnameVorname)
+                if(formular.Eigentuemer.Name == oldForm.Eigentuemer.Name)
                 {
                     formular.Modell.IDEigentuemer = oldForm.Modell.IDEigentuemer;
                 }
@@ -483,7 +483,7 @@ namespace Letzte_Zeugen.Controllers
                 foreach (var item in _context.Person.ToList())
             {
                 //Dopplungscheck Eigentümer
-                if (formular.Eigentuemer.NachnameVorname != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname))
+                if (formular.Eigentuemer.Name != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname))
                 {
                     formular.Modell.IDEigentuemer = item.ID;
                 }
@@ -753,7 +753,7 @@ namespace Letzte_Zeugen.Controllers
                 Bautypus = _context.Bautypus.Find(modell.IDBautypus),
                 Gefaehrdung = _context.Gefaehrdung.Find(modell.IDGefaehrdung),
                 BeteiligtePersonen = Personenliste,
-                Eigentuemer = _context.Person.Find(modell.IDEigentuemer),
+                Eigentuemer = _context.Eigentuemer.Find(modell.IDEigentuemer),
                 Erstellungsort = _context.Ort.Find(modell.Erstellungsort),
                 Standort = _context.Ort.Find(modell.Standort),
                 BeteiligteInstitute = new InstitutHelper() { Institute = beteiligteInstitute, Ort = _context.Ort.Find(beteiligteInstitute.Koordinate) },
