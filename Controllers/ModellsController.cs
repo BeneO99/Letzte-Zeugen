@@ -303,12 +303,15 @@ namespace Letzte_Zeugen.Controllers
 
 
             //Bilder speichern
-            StoreHelper.SaveModellImage(formular.Picture, formular.Modell.ID);
+            if(formular.Picture != null)
+            {
+				StoreHelper.SaveModellImage(formular.Picture, formular.Modell.ID);
+			}
 
 
 
-            //Mehrfach Namen Eintragen bei Beteiligte Personen 
-            if(formular.BeteiligtePersonen != null)
+			//Mehrfach Namen Eintragen bei Beteiligte Personen 
+			if (formular.BeteiligtePersonen != null)
             {
 				String[] personen = formular.BeteiligtePersonen.Split(";");
 				Person[] arraypersonen = new Person[personen.Length];

@@ -19,20 +19,22 @@ namespace Letzte_Zeugen.Helpers
             return Path.Combine(DEFAULTDIR, projectID);
         }
 
-        public static void SaveModellImage(IFormFile imageData, long projectID)
+        public static void SaveModellImage(List<IFormFile> imageData, long projectID)
         {
 
             if (imageData != null)
             {
-
-                using (var ms = new MemoryStream())
+                foreach (IFormFile file in imageData)
                 {
-                    imageData.CopyTo(ms);
-                    byte[] fileBytes = ms.ToArray();
-                    //saves image in Storage
-                    string path = Path.Combine(DEFAULTDIR, projectID.ToString(), "Bilder", imageData.Name);
-                    SaveImage(fileBytes, path);
-                }
+					using (var ms = new MemoryStream())
+					{
+						file.CopyTo(ms);
+						byte[] fileBytes = ms.ToArray();
+						//saves image in Storage
+						string path = Path.Combine(DEFAULTDIR, projectID.ToString(), "Bilder", file.FileName);
+						SaveImage(fileBytes, path);
+					}
+				}
             }
 
         }

@@ -117,6 +117,7 @@
 					<option value="2">Schale</option>
 					<option value="3">Gitternetz</option>
 					<option value="4">Staudamm</option>
+					<option value="5">Kuppel</option>
 				</select>
 				<span asp-validation-for="Modell.IDBautypus" class="text-danger"></span>
 			</div>
@@ -233,7 +234,7 @@
 
 			<div class="form-group">
 				<label asp-for="Picture" class="control-label">Bild Upload</label> </br>
-				<input asp-for="Picture" type="file" id="picInput" accept="image/*"/>
+				<input asp-for="Picture" type="file" id="picInput" accept="image/*" multiple/>
 				<span asp-validation-for="Picture" class="text-danger"></span>
 			</div>
 

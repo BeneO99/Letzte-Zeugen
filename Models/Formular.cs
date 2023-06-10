@@ -28,7 +28,7 @@ namespace Letzte_Zeugen.Models
         public List<Person> Personenliste { get; set; }
         public Link Link { get; set; }
 
-        public IFormFile Picture { get; set; }
+        public List<IFormFile> Picture { get; set; }
 
     }
 
