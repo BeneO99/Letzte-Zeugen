@@ -7,5 +7,7 @@ public partial class Person
 {
     public long ID { get; set; }
 
-    public string? NachnameVorname { get; set; }
+    public string? Nachname { get; set; }
+
+    public string? Vorname { get; set; }
 }

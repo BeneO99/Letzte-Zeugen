@@ -174,12 +174,12 @@ namespace Letzte_Zeugen.Controllers
          //DOPPLUNGSCHECK PERSONEN
 
             // Dopplungscheck für Eigentuemer beginnen
-            if (formular.Eigentuemer.NachnameVorname != null)
+            if (formular.Eigentuemer.Nachname != null)
             {
                 foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
 
                 {
-                    if (item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname)) //wenn gleich dann ID von gleichem 
+                    if (item.Nachname.Equals(formular.Eigentuemer.Nachname)) //wenn gleich dann ID von gleichem 
 
                     {
                         formular.Modell.IDEigentuemer = item.ID; // wo fremdschlüssel liegt
@@ -198,12 +198,12 @@ namespace Letzte_Zeugen.Controllers
 
 
             // Dopplungscheck für Urheber beginnen
-            if (formular.Urheber.NachnameVorname != null)
+            if (formular.Urheber.Nachname != null)
             {
                 foreach (var item in _context.Person.ToList()) // Abfrage, ob es schon in Db existiert 
 
                 {
-                    if (item.NachnameVorname.Equals(formular.Urheber.NachnameVorname)) //wenn gleich dann ID von gleichem 
+                    if (item.Nachname.Equals(formular.Urheber.Nachname)) //wenn gleich dann ID von gleichem 
 
                     {
                         formular.Modell.IDUrheber = item.ID; // wo fremdschlüssel liegt
@@ -320,7 +320,7 @@ namespace Letzte_Zeugen.Controllers
 				{
 					foreach (var item in _context.Person.ToList())
 					{
-						if (item.NachnameVorname.Equals(personen[i]))
+						if (item.Nachname.Equals(personen[i]))
 						{
 							arraypersonen[i] = item;
 						}
@@ -331,7 +331,7 @@ namespace Letzte_Zeugen.Controllers
 						arraypersonen[i] = new Person()
 
 						{
-							NachnameVorname = personen[i]
+							Nachname = personen[i]
 						};
 
 						_context.Add(arraypersonen[i]);
@@ -467,16 +467,16 @@ namespace Letzte_Zeugen.Controllers
 
             //DOPPLUNGSCHECK PERSONEN
 
-            if(formular.Eigentuemer.NachnameVorname != null && oldForm.Eigentuemer.NachnameVorname != null)
+            if(formular.Eigentuemer.Nachname != null && oldForm.Eigentuemer.Nachname != null)
             {
-                if(formular.Eigentuemer.NachnameVorname == oldForm.Eigentuemer.NachnameVorname)
+                if(formular.Eigentuemer.Nachname == oldForm.Eigentuemer.Nachname)
                 {
                     formular.Modell.IDEigentuemer = oldForm.Modell.IDEigentuemer;
                 }
             }
-            if (formular.Urheber.NachnameVorname != null && oldForm.Urheber.NachnameVorname != null)
+            if (formular.Urheber.Nachname != null && oldForm.Urheber.Nachname != null)
             {
-                if(formular.Urheber.NachnameVorname == oldForm.Urheber.NachnameVorname)
+                if(formular.Urheber.Nachname == oldForm.Urheber.Nachname)
                 {
                     formular.Modell.IDUrheber = oldForm.Modell.IDUrheber;
                 }
@@ -486,12 +486,12 @@ namespace Letzte_Zeugen.Controllers
                 foreach (var item in _context.Person.ToList())
             {
                 //Dopplungscheck Eigentümer
-                if (formular.Eigentuemer.NachnameVorname != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Eigentuemer.NachnameVorname))
+                if (formular.Eigentuemer.Nachname != null && formular.Urheber.Nachname != oldForm.Urheber.Nachname && item.Nachname.Equals(formular.Eigentuemer.Nachname))
                 {
                     formular.Modell.IDEigentuemer = item.ID;
                 }
                 //Dopplungscheck Urheber
-                if (formular.Urheber.NachnameVorname != null && formular.Urheber.NachnameVorname != oldForm.Urheber.NachnameVorname && item.NachnameVorname.Equals(formular.Urheber.NachnameVorname))
+                if (formular.Urheber.Nachname != null && formular.Urheber.Nachname != oldForm.Urheber.Nachname && item.Nachname.Equals(formular.Urheber.Nachname))
                 {
                     formular.Modell.IDUrheber = item.ID;
                 }
@@ -632,7 +632,7 @@ namespace Letzte_Zeugen.Controllers
             {
                 foreach (var item in _context.Person.ToList())
                 {
-                    if (item.NachnameVorname.Equals(personen[i]))
+                    if (item.Nachname.Equals(personen[i]))
                     {
                         arraypersonen[i] = item;
                     }
@@ -642,7 +642,7 @@ namespace Letzte_Zeugen.Controllers
                 {
                     arraypersonen[i] = new Person()
                     {
-                        NachnameVorname = personen[i]
+                        Nachname = personen[i]
                     };
 
                     _context.Add(arraypersonen[i]);
@@ -732,6 +732,14 @@ namespace Letzte_Zeugen.Controllers
             {
                 projekt = new Projekt();
             }
+            if(pruefInstitute == null)
+            {
+                pruefInstitute = new Institute();
+            }
+            if(beteiligteInstitute == null)
+            {
+                beteiligteInstitute = new Institute();
+            }
 
             String Personenliste = "";
 
@@ -740,7 +748,7 @@ namespace Letzte_Zeugen.Controllers
                 if (item.IDModell == modell.ID)
 
                 {
-                    Personenliste += _context.Person.Find(item.IDPerson).NachnameVorname + "; ";
+                    Personenliste += _context.Person.Find(item.IDPerson).Nachname + "; ";
                 }
 
             }

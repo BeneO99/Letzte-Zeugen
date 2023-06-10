@@ -1,6 +1,6 @@
-- Bautypus Kuppel erg�nzen
+- Bautypus Kuppel erg�nzen *DONE*
 
-- mehrere Bilder speichern
+- mehrere Bilder speichern *DONE*
 - mehrere Links speichern
 - mehrere PDF speichern
 
