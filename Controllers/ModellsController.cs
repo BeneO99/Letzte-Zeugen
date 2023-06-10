@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Letzte_Zeugen.Db;
 using Letzte_Zeugen.Models;
-using backend.Helpers;
+using Letzte_Zeugen.Helpers;
 
 namespace Letzte_Zeugen.Controllers
 {

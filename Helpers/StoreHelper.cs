@@ -1,9 +1,8 @@
-﻿
-using Letzte_Zeugen.Models;
+﻿using Letzte_Zeugen.Models;
 using Microsoft.CodeAnalysis;
 using System.IO;
 
-namespace backend.Helpers
+namespace Letzte_Zeugen.Helpers
 {
     /*
      * Simple helper class for storing images to the filesystem.
@@ -13,7 +12,7 @@ namespace backend.Helpers
         /*
          * Default directory where images will be stored.
          */
-        private static readonly string DEFAULTDIR = "...\\database\\image-data\\";
+        private static readonly string DEFAULTDIR = "./database/image-data";
 
         public static string GetProjectPath(string projectID)
         {
@@ -25,17 +24,17 @@ namespace backend.Helpers
 
             if (imageData != null)
             {
-                
+
                 using (var ms = new MemoryStream())
                 {
                     imageData.CopyTo(ms);
                     byte[] fileBytes = ms.ToArray();
                     //saves image in Storage
-                    string path = Path.Combine(DEFAULTDIR, projectID.ToString(),"Bilder", imageData.Name);
+                    string path = Path.Combine(DEFAULTDIR, projectID.ToString(), "Bilder", imageData.Name);
                     SaveImage(fileBytes, path);
                 }
             }
- 
+
         }
 
         private static void SaveImage(byte[] imagedata, string path)
