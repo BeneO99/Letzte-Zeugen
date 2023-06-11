@@ -318,7 +318,11 @@ namespace Letzte_Zeugen.Controllers
 			//Bilder speichern
 			if (formular.Picture != null)
 			{
-				StoreHelper.SaveModellImage(formular.Picture, formular.Modell.ID);
+				StoreHelper.SaveModellImage(formular.Picture, formular.Modell.ID, "Bilder");
+			}
+			if (formular.Files != null)
+			{
+				StoreHelper.SaveModellImage(formular.Files, formular.Modell.ID, "Dateien");
 			}
 
 
