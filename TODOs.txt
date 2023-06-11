@@ -35,3 +35,12 @@
 
 - Alles versteckt hinter anmeldung
 
+
+
+--------------BUGS--------------
+
+Institute Null werte
+Links Null werte
+Ansicht bei Index mit Bildern
+Zeile 272 if abfrage
+Doppelte Beteiligte Personen nach bearbeiten
