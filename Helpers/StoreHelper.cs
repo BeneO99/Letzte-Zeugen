@@ -12,7 +12,7 @@ namespace Letzte_Zeugen.Helpers
         /*
          * Default directory where images will be stored.
          */
-        private static readonly string DEFAULTDIR = "./database/image-data";
+        public static readonly string DEFAULTDIR = "./database/image-data";
 
         public static string GetProjectPath(string projectID)
         {

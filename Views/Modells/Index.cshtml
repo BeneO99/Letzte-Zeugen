@@ -194,6 +194,9 @@
                         @Html.DisplayFor(model => item.Modell.Spannweite)
                     </td>
                     <td>
+                    <a asp-action="Pictures" asp-route-id="@item.Modell.ID">Bilder abzeigen</a>
+                    </td>
+                    <td>
                         @Html.DisplayFor(model => item.Modell.Kapitel)
                     </td>
                     <td>

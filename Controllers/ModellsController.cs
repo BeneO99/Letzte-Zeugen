@@ -55,8 +55,32 @@ namespace Letzte_Zeugen.Controllers
 			return View(null);
 		}
 
-		// GET: Modells/Create
-		public IActionResult Create()
+        public async Task<IActionResult> Pictures(long? id)
+        {
+            Modell modell = _context.Modell.Find(id);
+
+			if(modell == null)
+			{
+				return null;
+			}
+			string picturepath = "~/Files/" + id.ToString() + "/Bilder/";
+			List<string> picturenames = new List<string>();
+			foreach(string item in Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "database/image-data/" + id.ToString() + "/Bilder")))
+			{
+				picturenames.Add(Path.Combine(picturepath, System.IO.Path.GetFileName(item)));
+			}
+
+            Pictures pictures = new Pictures()
+			{
+				ModellName = modell.Bezeichnung,
+				Images = picturenames
+
+            };
+            return View(pictures);
+        }
+
+        // GET: Modells/Create
+        public IActionResult Create()
 		{
 			return View();
 		}

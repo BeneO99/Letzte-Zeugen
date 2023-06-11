@@ -1,0 +1,17 @@
+﻿@model Letzte_Zeugen.Models.Pictures
+@{
+	ViewData["Title"] = "Pictures";
+}
+
+<h1>Bilder von @Model.ModellName</h1>
+<div class="flex-column">
+	@foreach (var image in Model.Images)
+	{
+		<img src="@Url.Content(image)" alt="Error" />
+	}
+</div>
+
+<div>
+	<br />
+	<a asp-action="Index">Zurück zur Liste</a>
+</div>
