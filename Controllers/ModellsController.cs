@@ -222,7 +222,7 @@ namespace Letzte_Zeugen.Controllers
 
 
 			//unterste ebene hinzufügen
-			if (formular.Link != null)
+			if (formular.Link.LinkPfad != null)
 			{
 				_context.Add(formular.Link);
 			}
@@ -232,7 +232,7 @@ namespace Letzte_Zeugen.Controllers
 			//zweite ebene hinzufügen von den Helpern
 
 			//Ids setzen um Verknüpfung zu haben
-			if(formular.Link != null)
+			if(formular.Link.LinkPfad != null)
 			{
 				formular.Modell.IDLink = formular.Link.ID;
 			}
@@ -241,10 +241,10 @@ namespace Letzte_Zeugen.Controllers
 				formular.Projekt.Projekt.Standort = formular.Projekt.Bauwerkort.ID;
 			}
 
-			if(formular.BeteiligteInstitute.Institute != null)
+			/*if(formular.BeteiligteInstitute.Institute != null)
 			{
 				_context.Add(formular.BeteiligteInstitute.Institute);
-			}
+			}*/
 			_context.SaveChangesAsync();
 			//DOPPLUNGSCHECK
 
