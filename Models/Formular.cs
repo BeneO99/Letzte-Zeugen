@@ -27,10 +27,10 @@ namespace Letzte_Zeugen.Models
         public Realisiert Realisiert { get; set; }
         public List<Person> Personenliste { get; set; }
         public Link Link { get; set; }
-
         public List<IFormFile>? Picture { get; set; }
+		public List<IFormFile>? Files { get; set; }
 
-    }
+	}
 
 
 }

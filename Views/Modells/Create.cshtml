@@ -68,11 +68,6 @@
 				<span asp-validation-for="Modell.Ausschnitt" class="text-danger"></span>
 			</div>
 
-
-			<!--ZOE hier haben wir den Dropdown als Beispiel verändert-->
-
-
-
 			<div class="form-group">
 				<label asp-for="Modell.IDZustand" class="control-label">Zustand</label>
 				<select asp-for="Modell.IDZustand">
@@ -84,8 +79,6 @@
 				</select>
 				<span asp-validation-for="Modell.IDZustand" class="text-danger"></span>
 			</div>
-			<!--hier ende -->
-
 
 			<div class="form-group">
 				<label asp-for="Modell.ErstellungszeitraumModell" class="control-label"> Erstellungszeitraum</label>
@@ -270,6 +263,12 @@
 				<label asp-for="Link.LinkPfad" class="control-label">Link Pfad</label>
 				<input asp-for="Link.LinkPfad" class="form-control" />
 				<span asp-validation-for="Link.LinkPfad" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Files" class="control-label">PDF Upload</label> <br />
+				<input asp-for="Files" type="file" id="picInput" multiple />
+				<span asp-validation-for="Files" class="text-danger"></span>
 			</div>
 
 

@@ -19,7 +19,7 @@ namespace Letzte_Zeugen.Helpers
             return Path.Combine(DEFAULTDIR, projectID);
         }
 
-        public static void SaveModellImage(List<IFormFile> imageData, long projectID)
+        public static void SaveModellImage(List<IFormFile> imageData, long projectID, string subfolder)
         {
 
             if (imageData != null)
@@ -31,7 +31,7 @@ namespace Letzte_Zeugen.Helpers
 						file.CopyTo(ms);
 						byte[] fileBytes = ms.ToArray();
 						//saves image in Storage
-						string path = Path.Combine(DEFAULTDIR, projectID.ToString(), "Bilder", file.FileName);
+						string path = Path.Combine(DEFAULTDIR, projectID.ToString(), subfolder, file.FileName);
 						SaveImage(fileBytes, path);
 					}
 				}
