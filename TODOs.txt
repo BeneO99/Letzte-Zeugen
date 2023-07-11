@@ -8,9 +8,17 @@
 
 - Suchfunktion
 
+- Nutzerkonten und alles dahinter verstecken
+
 - Sch�ne Oberfl�che mit Logo, passender Schrift, angepassten spalten
 
 - Vorschlagsdroppdown
+
+- stying nach https://structurae.net/en/structures/
+
+FUER DOMAIN:
+
+
 
 <<<<<<< HEAD
 =======
